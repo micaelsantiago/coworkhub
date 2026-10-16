@@ -1,0 +1,87 @@
+name: coworkhub-dev
+
+x-app: &app
+  build:
+    context: .
+    args:
+      LOCAL_UID: ${LOCAL_UID:-1000}
+      LOCAL_GID: ${LOCAL_GID:-1000}
+  user: "${LOCAL_UID:-1000}:${LOCAL_GID:-1000}"
+  env_file:
+    - .env
+  volumes:
+    - .:/app
+  depends_on:
+    postgres:
+      condition: service_healthy
+    redis:
+      condition: service_healthy
+
+x-logging: &logging
+  driver: json-file
+  options:
+    max-size: "20m"
+    max-file: "5"
+
+services:
+  postgres:
+    image: postgres:16-alpine
+    environment:
+      POSTGRES_DB: ${POSTGRES_DB:-coworkhub}
+      POSTGRES_USER: ${POSTGRES_USER:-coworkhub}
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD:-coworkhub}
+    ports:
+      - "${POSTGRES_EXPOSED_PORT:-5432}:5432"
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U ${POSTGRES_USER:-coworkhub} -d ${POSTGRES_DB:-coworkhub}"]
+      interval: 5s
+      timeout: 5s
+      retries: 10
+    logging: *logging
+
+  redis:
+    image: redis:7.4-alpine
+    command: redis-server --save 60 1 --loglevel warning
+    ports:
+      - "${REDIS_EXPOSED_PORT:-6379}:6379"
+    volumes:
+      - redis_data:/data
+    healthcheck:
+      test: ["CMD", "redis-cli", "ping"]
+      interval: 5s
+      timeout: 5s
+      retries: 10
+    logging: *logging
+
+  web:
+    <<: *app
+    command: /app/scripts/start-dev.sh
+    ports:
+      - "${WEB_PORT:-8000}:8000"
+    logging: *logging
+
+  worker:
+    <<: *app
+    command: celery -A config worker --loglevel=INFO --concurrency=2 --max-tasks-per-child=100
+    logging: *logging
+
+  beat:
+    <<: *app
+    command: celery -A config beat --loglevel=INFO --schedule=/tmp/celerybeat-schedule
+    logging: *logging
+
+  frontend:
+    image: node:24-alpine
+    user: "${LOCAL_UID:-1000}:${LOCAL_GID:-1000}"
+    working_dir: /app
+    command: sh -c "npm ci && npm run dev"
+    volumes:
+      - .:/app
+    init: true
+    logging: *logging
+
+volumes:
+  postgres_data:
+  redis_data:

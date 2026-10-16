@@ -1,0 +1,43 @@
+[build-system]
+requires = ["setuptools>=77"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "coworkhub"
+version = "0.1.0"
+description = "Plataforma SaaS para operação de coworkings"
+requires-python = ">=3.13,<3.15"
+dependencies = [
+    "celery[redis]>=5.6,<5.7",
+    "django>=5.2,<5.3",
+    "django-environ>=0.12,<0.13",
+    "gunicorn>=25,<27",
+    "psycopg[binary]>=3.3,<3.4",
+]
+
+[project.optional-dependencies]
+dev = [
+    "pytest>=9,<10",
+    "pytest-django>=4.11,<5",
+    "ruff>=0.17,<0.18",
+]
+
+[tool.setuptools]
+packages = []
+
+[tool.pytest.ini_options]
+DJANGO_SETTINGS_MODULE = "config.settings.test"
+addopts = "--ds=config.settings.test"
+python_files = ["test_*.py", "tests.py"]
+testpaths = ["tests", "apps"]
+
+[tool.ruff]
+target-version = "py313"
+line-length = 100
+exclude = ["*/migrations/*", "docs/*"]
+
+[tool.ruff.lint]
+select = ["E", "F", "I", "UP", "B", "DJ"]
+
+[tool.ruff.format]
+quote-style = "double"

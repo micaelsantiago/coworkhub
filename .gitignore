@@ -73,6 +73,14 @@ node_modules/
 npm-debug.log*
 yarn-debug.log*
 yarn-error.log*
+static/css/app.css
+static/js/app.js
+
+# Celery
+celerybeat-schedule*
+
+# Local tooling
+.ruff_cache/
 
 # IDEs
 .idea/
