@@ -11,99 +11,50 @@
         Django, PostgreSQL, Redis, Celery, HTMX, Alpine.js e Tailwind CSS estão conectados.
         Os módulos de domínio estão preparados para as próximas etapas, sem regras de negócio.
       </p>
-      <div class="mt-8 flex flex-wrap items-center gap-4" x-data="{ checked: false, modalOpen: false }">
-        <button
-          class="rounded-lg bg-emerald-400 px-4 py-2 font-semibold text-slate-950 transition hover:bg-emerald-300"
-          type="button"
-          @click="checked = !checked"
-        >
-          Testar Alpine.js
-        </button>
-        <span class="self-center text-emerald-300" x-show="checked" x-cloak>Funcionando.</span>
+      <!-- Demonstração de Componentes Reutilizáveis -->
+      <div class="mt-8 space-y-6">
+        <div class="flex flex-wrap items-center gap-3">
+          {% include "components/badge.html" with text="Ambiente Local" variant="success" dot=True %}
+          {% include "components/badge.html" with text="Pines UI" variant="info" %}
+          {% include "components/badge.html" with text="Tailwind v4" variant="neutral" %}
+        </div>
 
-        <!-- Pines UI: Modal de Exemplo -->
-        <div @keydown.escape.window="modalOpen = false" class="relative z-50">
+        <div class="flex flex-wrap items-center gap-4" x-data="{ checked: false }">
           <button
-            @click="modalOpen = true"
+            class="rounded-lg bg-emerald-400 px-4 py-2 font-semibold text-slate-950 transition hover:bg-emerald-300 text-sm"
             type="button"
-            class="rounded-lg border border-slate-700 bg-slate-800/80 px-4 py-2 font-semibold text-slate-200 transition hover:bg-slate-700 hover:text-white"
+            @click="checked = !checked"
           >
-            Exemplo de Modal (Pines UI)
+            Testar Alpine.js
           </button>
+          <span class="self-center text-emerald-300 text-sm" x-show="checked" x-cloak>Funcionando.</span>
 
-          <template x-teleport="body">
-            <div
-              x-show="modalOpen"
-              class="fixed top-0 left-0 z-50 flex items-center justify-center w-screen h-screen p-4"
-              x-cloak
-            >
-              <!-- Backdrop -->
-              <div
-                x-show="modalOpen"
-                x-transition:enter="ease-out duration-300"
-                x-transition:enter-start="opacity-0"
-                x-transition:enter-end="opacity-100"
-                x-transition:leave="ease-in duration-200"
-                x-transition:leave-start="opacity-100"
-                x-transition:leave-end="opacity-0"
-                @click="modalOpen = false"
-                class="absolute inset-0 w-full h-full bg-slate-950/80 backdrop-blur-xs"
-              ></div>
+          <!-- Modal Reutilizável -->
+          {% include "components/modal.html" with modal_id="demo-modal" title="Modal Reutilizável (Pines UI)" trigger_text="Abrir Modal" content="Este modal foi extraído para templates/components/modal.html. Suporta foco acessível (focus-trap), fechamento com Esc ou clique fora, e parâmetros dinâmicos via Django." %}
 
-              <!-- Dialog panel com Focus Trap (@alpinejs/focus) -->
-              <div
-                x-show="modalOpen"
-                x-trap.inert.noscroll="modalOpen"
-                x-transition:enter="ease-out duration-300"
-                x-transition:enter-start="opacity-0 translate-y-4 sm:translate-y-0 sm:scale-95"
-                x-transition:enter-end="opacity-100 translate-y-0 sm:scale-100"
-                x-transition:leave="ease-in duration-200"
-                x-transition:leave-start="opacity-100 translate-y-0 sm:scale-100"
-                x-transition:leave-end="opacity-0 translate-y-4 sm:translate-y-0 sm:scale-95"
-                class="relative w-full max-w-lg rounded-xl border border-slate-800 bg-slate-900 p-6 shadow-2xl"
-              >
-                <div class="flex items-start justify-between pb-3">
-                  <h3 class="text-lg font-semibold text-slate-100">Pines UI + Alpine Integrado</h3>
-                  <button
-                    @click="modalOpen = false"
-                    type="button"
-                    class="rounded-md p-1 text-slate-400 hover:bg-slate-800 hover:text-slate-200"
-                  >
-                    <svg class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />
-                    </svg>
-                  </button>
-                </div>
-                <div class="space-y-3 py-2 text-sm text-slate-300">
-                  <p>
-                    Os plugins <code class="rounded bg-slate-800 px-1.5 py-0.5 text-emerald-300">@alpinejs/focus</code>
-                    e <code class="rounded bg-slate-800 px-1.5 py-0.5 text-emerald-300">@alpinejs/collapse</code>
-                    estão prontos para uso com os componentes do Pines UI.
-                  </p>
-                  <p>
-                    Com <code class="rounded bg-slate-800 px-1.5 py-0.5 text-slate-200">x-teleport</code>,
-                    o modal é renderizado direto no body, sem conflito com containers ou rotas do HTMX.
-                  </p>
-                </div>
-                <div class="mt-6 flex justify-end gap-3">
-                  <button
-                    @click="modalOpen = false"
-                    type="button"
-                    class="rounded-lg border border-slate-700 px-4 py-2 text-sm font-semibold text-slate-300 hover:bg-slate-800"
-                  >
-                    Fechar (Esc)
-                  </button>
-                  <button
-                    @click="modalOpen = false"
-                    type="button"
-                    class="rounded-lg bg-emerald-400 px-4 py-2 text-sm font-semibold text-slate-950 hover:bg-emerald-300"
-                  >
-                    Confirmar
-                  </button>
-                </div>
-              </div>
-            </div>
-          </template>
+          <!-- Dropdown Reutilizável -->
+          {% include "components/dropdown.html" with trigger_text="Menu de Opções" %}
+
+          <!-- Disparo de Toast / Notificação -->
+          <button
+            @click="$dispatch('toast', { message: 'Notificação do Coworkhub via Alpine/HTMX!', type: 'success' })"
+            type="button"
+            class="rounded-lg border border-slate-700 bg-slate-800/80 px-4 py-2 text-sm font-semibold text-slate-200 transition hover:bg-slate-700 hover:text-white"
+          >
+            Disparar Notificação (Toast)
+          </button>
+        </div>
+
+        <!-- Demonstração do Componente de Botões -->
+        <div class="pt-4 border-t border-slate-800/60">
+          <p class="text-xs font-semibold uppercase tracking-wider text-slate-400 mb-3">Variantes do Componente de Botão</p>
+          <div class="flex flex-wrap items-center gap-3">
+            {% include "components/button.html" with text="Botão Primário" variant="primary" %}
+            {% include "components/button.html" with text="Botão Secundário" variant="secondary" %}
+            {% include "components/button.html" with text="Ação Perigosa" variant="danger" size="sm" %}
+            {% include "components/button.html" with text="Com Link" href="#top" variant="outline" size="sm" %}
+            {% include "components/button.html" with text="Desabilitado" variant="primary" disabled=True size="sm" %}
+          </div>
         </div>
       </div>
     </section>

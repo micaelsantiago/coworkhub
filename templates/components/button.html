@@ -1,0 +1,87 @@
+{% comment %}
+Componente: Botão Reutilizável (Pines UI + Tailwind CSS + HTMX + Alpine.js)
+Parâmetros aceitos (via `with`):
+  - text: texto do botão (padrão: 'Confirmar')
+  - variant: 'primary' (padrão, esmeralda), 'secondary' (slate), 'danger' (vermelho), 'ghost', 'outline'
+  - size: 'sm', 'md' (padrão), 'lg'
+  - button_type: 'button' (padrão), 'submit', 'reset'
+  - href: se informado, renderiza uma tag <a> com estilo de botão
+  - disabled: True/False
+  - loading: True/False (se True, renderiza o spinner para requisições HTMX)
+  - hx_action: atributos HTMX (ex: 'hx-post="/url/" hx-target="#id" hx-swap="outerHTML"')
+  - extra_class: classes Tailwind adicionais
+  - icon_svg: SVG customizado exibido antes do texto
+
+Exemplos de uso:
+  {% include "components/button.html" with text="Salvar Reserva" variant="primary" %}
+  {% include "components/button.html" with text="Excluir" variant="danger" size="sm" hx_action='hx-post="/bookings/1/cancel/"' loading=True %}
+  {% include "components/button.html" with text="Voltar ao Início" href="/" variant="secondary" %}
+{% endcomment %}
+
+{% if href %}
+  <a
+    href="{{ href }}"
+    class="inline-flex items-center justify-center font-semibold transition rounded-lg select-none cursor-pointer focus:outline-hidden focus:ring-2 focus:ring-offset-2 focus:ring-offset-slate-950
+    {% if size == 'sm' %}
+      px-2.5 py-1.5 text-xs gap-1.5
+    {% elif size == 'lg' %}
+      px-5 py-2.5 text-base gap-2.5
+    {% else %}
+      px-4 py-2 text-sm gap-2
+    {% endif %}
+    {% if variant == 'secondary' %}
+      border border-slate-700 bg-slate-800/80 text-slate-200 hover:bg-slate-700 hover:text-white focus:ring-slate-500
+    {% elif variant == 'danger' %}
+      border border-rose-500/30 bg-rose-500/10 text-rose-300 hover:bg-rose-500/20 hover:text-rose-200 focus:ring-rose-500
+    {% elif variant == 'ghost' %}
+      text-slate-300 hover:bg-slate-800 hover:text-white focus:ring-slate-600
+    {% elif variant == 'outline' %}
+      border border-slate-700 bg-transparent text-slate-300 hover:bg-slate-800 hover:text-white focus:ring-slate-600
+    {% else %}
+      bg-emerald-400 text-slate-950 hover:bg-emerald-300 focus:ring-emerald-400 active:bg-emerald-500 shadow-xs
+    {% endif %}
+    {% if disabled %}
+      opacity-50 pointer-events-none cursor-not-allowed
+    {% endif %}
+    {{ extra_class }}"
+  >
+    {% if icon_svg %}{{ icon_svg|safe }}{% endif %}
+    <span>{{ text|default:"Confirmar" }}</span>
+  </a>
+{% else %}
+  <button
+    type="{{ button_type|default:'button' }}"
+    {% if disabled %}disabled{% endif %}
+    {% if hx_action %}{{ hx_action|safe }}{% endif %}
+    class="inline-flex items-center justify-center font-semibold transition rounded-lg select-none cursor-pointer focus:outline-hidden focus:ring-2 focus:ring-offset-2 focus:ring-offset-slate-950 disabled:opacity-50 disabled:pointer-events-none disabled:cursor-not-allowed
+    {% if size == 'sm' %}
+      px-2.5 py-1.5 text-xs gap-1.5
+    {% elif size == 'lg' %}
+      px-5 py-2.5 text-base gap-2.5
+    {% else %}
+      px-4 py-2 text-sm gap-2
+    {% endif %}
+    {% if variant == 'secondary' %}
+      border border-slate-700 bg-slate-800/80 text-slate-200 hover:bg-slate-700 hover:text-white focus:ring-slate-500 active:bg-slate-800
+    {% elif variant == 'danger' %}
+      border border-rose-500/30 bg-rose-500/10 text-rose-300 hover:bg-rose-500/20 hover:text-rose-200 focus:ring-rose-500 active:bg-rose-500/30
+    {% elif variant == 'ghost' %}
+      text-slate-300 hover:bg-slate-800 hover:text-white focus:ring-slate-600
+    {% elif variant == 'outline' %}
+      border border-slate-700 bg-transparent text-slate-300 hover:bg-slate-800 hover:text-white focus:ring-slate-600
+    {% else %}
+      bg-emerald-400 text-slate-950 hover:bg-emerald-300 focus:ring-emerald-400 active:bg-emerald-500 shadow-xs
+    {% endif %}
+    {{ extra_class }}"
+  >
+    {% if loading %}
+      <svg class="htmx-indicator animate-spin -ml-0.5 h-4 w-4 shrink-0 text-current" fill="none" viewBox="0 0 24 24">
+        <circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"></circle>
+        <path class="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
+      </svg>
+    {% endif %}
+
+    {% if icon_svg %}{{ icon_svg|safe }}{% endif %}
+    <span>{{ text|default:"Confirmar" }}</span>
+  </button>
+{% endif %}
