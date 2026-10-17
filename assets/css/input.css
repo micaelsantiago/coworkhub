@@ -2,3 +2,7 @@
 
 @source "../../templates";
 @source "../../apps";
+
+[x-cloak] {
+  display: none !important;
+}

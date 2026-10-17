@@ -10,6 +10,8 @@
     "watch:js": "esbuild ./assets/js/app.js --bundle --outfile=./static/js/app.js --watch"
   },
   "dependencies": {
+    "@alpinejs/collapse": "^3.17.4",
+    "@alpinejs/focus": "^3.17.4",
     "alpinejs": "^3.15.0",
     "htmx.org": "^2.0.8"
   },
@@ -18,5 +20,8 @@
     "concurrently": "^9.2.1",
     "esbuild": "^0.25.11",
     "tailwindcss": "4.3.0"
+  },
+  "optionalDependencies": {
+    "@parcel/watcher-linux-x64-glibc": "^2.6.0"
   }
 }
