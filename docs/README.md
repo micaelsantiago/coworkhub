@@ -19,6 +19,7 @@ Cada empresa de coworking é um tenant e pode possuir uma ou mais unidades. O mo
 | [`infraestrutura.md`](infraestrutura.md) | Hospedagem, segurança, backup e operação |
 | [`agentes-e-skills.md`](agentes-e-skills.md) | Agentes especializados, catálogo de skills e fluxo OpenSpec |
 | [`fluxo-de-desenvolvimento.md`](fluxo-de-desenvolvimento.md) | Branches semânticas, sandbox, promoção e produção |
+| [`adr/`](adr/0001-planos-operacionais-e-livro-razao.md) | Registros de Decisões de Arquitetura (ADRs) |
 
 ## Decisões já tomadas
 
