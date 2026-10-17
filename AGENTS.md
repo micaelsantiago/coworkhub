@@ -8,6 +8,7 @@
 
 ## Local workflow
 
+- Before creating a branch, opening a PR, merging, or deleting a branch, read `docs/fluxo-de-desenvolvimento.md`. Work branches always start from `main`, validate through `develop`, and are promoted independently to `main`.
 - Run `make setup` first: Compose requires `.env`, and this copies `.env.example` when absent before building images. `make up` starts PostgreSQL, Redis, Django, Celery worker/beat, and the frontend watcher; the web startup script applies migrations automatically.
 - Full verification is `make lint` followed by `make test`.
 - Focus a test without running the suite: `docker compose run --rm web pytest tests/test_user.py::test_user_authenticates_with_email` (replace the node path as needed). Pytest always uses `config.settings.test` via `pyproject.toml`.
