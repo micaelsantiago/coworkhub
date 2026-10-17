@@ -1,0 +1,60 @@
+{% comment %}
+Componente: Dropdown Menu (Pines UI + Alpine.js + Tailwind)
+Parâmetros aceitos (via `with`):
+  - trigger_text: texto exibido no botão
+  - align: 'right' (padrão) ou 'left'
+  - width: classe de largura (padrão: 'w-48')
+Exemplo de uso:
+  {% include "components/dropdown.html" with trigger_text="Ações" align="right" %}
+{% endcomment %}
+
+<div
+  x-data="{ dropdownOpen: false }"
+  @keydown.escape.window="dropdownOpen = false"
+  class="relative inline-block text-left"
+>
+  <button
+    @click="dropdownOpen = !dropdownOpen"
+    type="button"
+    class="inline-flex items-center gap-2 rounded-lg border border-slate-700 bg-slate-800/80 px-3.5 py-2 text-sm font-semibold text-slate-200 transition hover:bg-slate-700 hover:text-white"
+  >
+    <span>{{ trigger_text|default:"Opções" }}</span>
+    <svg
+      class="h-4 w-4 transition-transform duration-200"
+      :class="{ 'rotate-180': dropdownOpen }"
+      fill="none"
+      viewBox="0 0 24 24"
+      stroke="currentColor"
+    >
+      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" />
+    </svg>
+  </button>
+
+  <div
+    x-show="dropdownOpen"
+    @click.outside="dropdownOpen = false"
+    x-transition:enter="transition ease-out duration-100"
+    x-transition:enter-start="opacity-0 scale-95"
+    x-transition:enter-end="opacity-100 scale-100"
+    x-transition:leave="transition ease-in duration-75"
+    x-transition:leave-start="opacity-100 scale-100"
+    x-transition:leave-end="opacity-0 scale-95"
+    class="absolute {{ align|default:'right' }}-0 z-50 mt-2 {{ width|default:'w-48' }} origin-top-{{ align|default:'right' }} rounded-lg border border-slate-800 bg-slate-900 p-1 shadow-xl text-sm text-slate-200 focus:outline-hidden"
+    x-cloak
+  >
+    <div class="py-1">
+      {% block dropdown_items %}
+        <a href="#" class="block rounded-md px-3 py-2 text-slate-300 transition hover:bg-slate-800 hover:text-white">
+          Visualizar detalhes
+        </a>
+        <a href="#" class="block rounded-md px-3 py-2 text-slate-300 transition hover:bg-slate-800 hover:text-white">
+          Editar informações
+        </a>
+        <div class="my-1 border-t border-slate-800"></div>
+        <button type="button" class="block w-full text-left rounded-md px-3 py-2 text-rose-400 transition hover:bg-rose-500/10 hover:text-rose-300">
+          Excluir
+        </button>
+      {% endblock %}
+    </div>
+  </div>
+</div>

@@ -1,0 +1,42 @@
+{% comment %}
+Componente: Badge de Status (Pines UI + Tailwind)
+Parâmetros aceitos (via `with`):
+  - text: texto exibido no badge
+  - variant: 'success' (padrão, verde), 'danger' (vermelho), 'warning' (âmbar), 'info' (azul), 'neutral' (cinza)
+  - dot: True/False (se exibe ponto indicador pulsante)
+Exemplo de uso:
+  {% include "components/badge.html" with text="Confirmada" variant="success" dot=True %}
+{% endcomment %}
+
+<span
+  class="inline-flex items-center gap-1.5 rounded-full px-2.5 py-0.5 text-xs font-medium border
+  {% if variant == 'danger' %}
+    border-rose-500/20 bg-rose-500/10 text-rose-300
+  {% elif variant == 'warning' %}
+    border-amber-500/20 bg-amber-500/10 text-amber-300
+  {% elif variant == 'info' %}
+    border-sky-500/20 bg-sky-500/10 text-sky-300
+  {% elif variant == 'neutral' %}
+    border-slate-700 bg-slate-800 text-slate-300
+  {% else %}
+    border-emerald-500/20 bg-emerald-500/10 text-emerald-300
+  {% endif %}"
+>
+  {% if dot %}
+    <span
+      class="h-1.5 w-1.5 rounded-full
+      {% if variant == 'danger' %}
+        bg-rose-400
+      {% elif variant == 'warning' %}
+        bg-amber-400
+      {% elif variant == 'info' %}
+        bg-sky-400
+      {% elif variant == 'neutral' %}
+        bg-slate-400
+      {% else %}
+        bg-emerald-400
+      {% endif %}"
+    ></span>
+  {% endif %}
+  {{ text|default:"Ativo" }}
+</span>

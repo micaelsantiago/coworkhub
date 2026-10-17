@@ -1,0 +1,108 @@
+{% comment %}
+Componente: Slide-over / Drawer Lateral (Pines UI + Alpine.js + Tailwind)
+Parâmetros aceitos (via `with`):
+  - slide_over_id: identificador único (ex: 'booking-details')
+  - title: título do painel
+  - trigger_text: texto do botão disparador (opcional)
+  - max_width: classe de largura máxima (padrão: 'max-w-md')
+Exemplo de uso:
+  {% include "components/slide_over.html" with slide_over_id="room-drawer" title="Detalhes da Sala" trigger_text="Ver Sala" %}
+{% endcomment %}
+
+<div
+  x-data="{
+    slideOverOpen: false,
+    init() {
+      window.addEventListener('open-slideover', (e) => {
+        if (e.detail && e.detail.id === '{{ slide_over_id|default:"slideover" }}') {
+          this.slideOverOpen = true;
+        }
+      });
+      window.addEventListener('close-slideover', (e) => {
+        if (e.detail && e.detail.id === '{{ slide_over_id|default:"slideover" }}') {
+          this.slideOverOpen = false;
+        }
+      });
+    }
+  }"
+  @keydown.escape.window="slideOverOpen = false"
+  class="inline-block"
+>
+  {% if trigger_text %}
+    <button
+      @click="slideOverOpen = true"
+      type="button"
+      class="rounded-lg border border-slate-700 bg-slate-800/80 px-4 py-2 text-sm font-semibold text-slate-200 transition hover:bg-slate-700 hover:text-white"
+    >
+      {{ trigger_text }}
+    </button>
+  {% endif %}
+
+  <template x-teleport="body">
+    <div
+      x-show="slideOverOpen"
+      class="fixed inset-0 z-50 overflow-hidden"
+      x-cloak
+    >
+      <!-- Backdrop -->
+      <div
+        x-show="slideOverOpen"
+        x-transition:enter="ease-in-out duration-300"
+        x-transition:enter-start="opacity-0"
+        x-transition:enter-end="opacity-100"
+        x-transition:leave="ease-in-out duration-300"
+        x-transition:leave-start="opacity-100"
+        x-transition:leave-end="opacity-0"
+        @click="slideOverOpen = false"
+        class="fixed inset-0 bg-slate-950/80 backdrop-blur-xs transition-opacity"
+      ></div>
+
+      <!-- Painel deslizante à direita -->
+      <div class="fixed inset-y-0 right-0 flex max-w-full pl-10">
+        <div
+          x-show="slideOverOpen"
+          x-trap.inert.noscroll="slideOverOpen"
+          x-transition:enter="transform transition ease-in-out duration-300"
+          x-transition:enter-start="translate-x-full"
+          x-transition:enter-end="translate-x-0"
+          x-transition:leave="transform transition ease-in-out duration-300"
+          x-transition:leave-start="translate-x-0"
+          x-transition:leave-end="translate-x-full"
+          class="w-screen {{ max_width|default:'max-w-md' }} border-l border-slate-800 bg-slate-900 shadow-2xl flex flex-col"
+        >
+          <!-- Cabeçalho -->
+          <div class="flex items-center justify-between border-b border-slate-800/80 px-6 py-5">
+            <h2 class="text-lg font-semibold text-slate-100">
+              {{ title|default:"Painel Lateral" }}
+            </h2>
+            <button
+              @click="slideOverOpen = false"
+              type="button"
+              class="rounded-md p-1.5 text-slate-400 hover:bg-slate-800 hover:text-slate-200 transition"
+            >
+              <svg class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />
+              </svg>
+            </button>
+          </div>
+
+          <!-- Conteúdo -->
+          <div class="flex-1 overflow-y-auto px-6 py-6 text-sm text-slate-300 space-y-4">
+            {{ content|default:"Conteúdo do painel lateral." }}
+          </div>
+
+          <!-- Rodapé -->
+          <div class="border-t border-slate-800/80 px-6 py-4 flex justify-end gap-3 bg-slate-950/30">
+            <button
+              @click="slideOverOpen = false"
+              type="button"
+              class="rounded-lg border border-slate-700 px-4 py-2 text-sm font-semibold text-slate-300 hover:bg-slate-800 transition"
+            >
+              Fechar
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </template>
+</div>
