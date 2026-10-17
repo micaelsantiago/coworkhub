@@ -3,6 +3,22 @@
 @source "../../templates";
 @source "../../apps";
 
+@theme {
+  --color-primary: #b85c38;
+  --color-primary-hover: #a24f2e;
+  --color-primary-active: #8c4224;
+  --color-primary-subtle: #b85c381a;
+
+  --color-secondary: #e5e7eb;
+  --color-secondary-hover: #d1d5db;
+  --color-secondary-muted: #6b7280;
+
+  --color-black: #000000;
+  --color-surface-card: #ffffff;
+  --color-surface-border: #e5e7eb;
+  --color-surface-muted: #f9fafb;
+}
+
 [x-cloak] {
   display: none !important;
 }

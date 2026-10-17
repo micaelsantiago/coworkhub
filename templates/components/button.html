@@ -21,7 +21,7 @@ Exemplos de uso:
 {% if href %}
   <a
     href="{{ href }}"
-    class="inline-flex items-center justify-center font-semibold transition rounded-lg select-none cursor-pointer focus:outline-hidden focus:ring-2 focus:ring-offset-2 focus:ring-offset-slate-950
+    class="inline-flex items-center justify-center font-semibold transition rounded-lg select-none cursor-pointer focus:outline-hidden focus:ring-2 focus:ring-offset-2 focus:ring-offset-white
     {% if size == 'sm' %}
       px-2.5 py-1.5 text-xs gap-1.5
     {% elif size == 'lg' %}
@@ -30,15 +30,15 @@ Exemplos de uso:
       px-4 py-2 text-sm gap-2
     {% endif %}
     {% if variant == 'secondary' %}
-      border border-slate-700 bg-slate-800/80 text-slate-200 hover:bg-slate-700 hover:text-white focus:ring-slate-500
+      border border-secondary bg-secondary text-black hover:bg-secondary-hover focus:ring-black/20
     {% elif variant == 'danger' %}
-      border border-rose-500/30 bg-rose-500/10 text-rose-300 hover:bg-rose-500/20 hover:text-rose-200 focus:ring-rose-500
+      border border-rose-200 bg-rose-50 text-rose-700 hover:bg-rose-100 focus:ring-rose-400
     {% elif variant == 'ghost' %}
-      text-slate-300 hover:bg-slate-800 hover:text-white focus:ring-slate-600
+      text-black hover:bg-secondary focus:ring-black/10
     {% elif variant == 'outline' %}
-      border border-slate-700 bg-transparent text-slate-300 hover:bg-slate-800 hover:text-white focus:ring-slate-600
+      border border-secondary bg-white text-black hover:bg-secondary focus:ring-black/10
     {% else %}
-      bg-emerald-400 text-slate-950 hover:bg-emerald-300 focus:ring-emerald-400 active:bg-emerald-500 shadow-xs
+      bg-primary text-white hover:bg-primary-hover focus:ring-primary active:bg-primary-active shadow-xs
     {% endif %}
     {% if disabled %}
       opacity-50 pointer-events-none cursor-not-allowed
@@ -53,7 +53,7 @@ Exemplos de uso:
     type="{{ button_type|default:'button' }}"
     {% if disabled %}disabled{% endif %}
     {% if hx_action %}{{ hx_action|safe }}{% endif %}
-    class="inline-flex items-center justify-center font-semibold transition rounded-lg select-none cursor-pointer focus:outline-hidden focus:ring-2 focus:ring-offset-2 focus:ring-offset-slate-950 disabled:opacity-50 disabled:pointer-events-none disabled:cursor-not-allowed
+    class="inline-flex items-center justify-center font-semibold transition rounded-lg select-none cursor-pointer focus:outline-hidden focus:ring-2 focus:ring-offset-2 focus:ring-offset-white disabled:opacity-50 disabled:pointer-events-none disabled:cursor-not-allowed
     {% if size == 'sm' %}
       px-2.5 py-1.5 text-xs gap-1.5
     {% elif size == 'lg' %}
@@ -62,15 +62,15 @@ Exemplos de uso:
       px-4 py-2 text-sm gap-2
     {% endif %}
     {% if variant == 'secondary' %}
-      border border-slate-700 bg-slate-800/80 text-slate-200 hover:bg-slate-700 hover:text-white focus:ring-slate-500 active:bg-slate-800
+      border border-secondary bg-secondary text-black hover:bg-secondary-hover focus:ring-black/20 active:bg-secondary-hover
     {% elif variant == 'danger' %}
-      border border-rose-500/30 bg-rose-500/10 text-rose-300 hover:bg-rose-500/20 hover:text-rose-200 focus:ring-rose-500 active:bg-rose-500/30
+      border border-rose-200 bg-rose-50 text-rose-700 hover:bg-rose-100 focus:ring-rose-400 active:bg-rose-200
     {% elif variant == 'ghost' %}
-      text-slate-300 hover:bg-slate-800 hover:text-white focus:ring-slate-600
+      text-black hover:bg-secondary focus:ring-black/10
     {% elif variant == 'outline' %}
-      border border-slate-700 bg-transparent text-slate-300 hover:bg-slate-800 hover:text-white focus:ring-slate-600
+      border border-secondary bg-white text-black hover:bg-secondary focus:ring-black/10
     {% else %}
-      bg-emerald-400 text-slate-950 hover:bg-emerald-300 focus:ring-emerald-400 active:bg-emerald-500 shadow-xs
+      bg-primary text-white hover:bg-primary-hover focus:ring-primary active:bg-primary-active shadow-xs
     {% endif %}
     {{ extra_class }}"
   >

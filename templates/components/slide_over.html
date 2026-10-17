@@ -32,7 +32,7 @@ Exemplo de uso:
     <button
       @click="slideOverOpen = true"
       type="button"
-      class="rounded-lg border border-slate-700 bg-slate-800/80 px-4 py-2 text-sm font-semibold text-slate-200 transition hover:bg-slate-700 hover:text-white"
+      class="rounded-lg border border-secondary bg-white px-4 py-2 text-sm font-semibold text-black transition hover:bg-secondary"
     >
       {{ trigger_text }}
     </button>
@@ -54,7 +54,7 @@ Exemplo de uso:
         x-transition:leave-start="opacity-100"
         x-transition:leave-end="opacity-0"
         @click="slideOverOpen = false"
-        class="fixed inset-0 bg-slate-950/80 backdrop-blur-xs transition-opacity"
+        class="fixed inset-0 bg-black/50 backdrop-blur-xs transition-opacity"
       ></div>
 
       <!-- Painel deslizante à direita -->
@@ -68,17 +68,17 @@ Exemplo de uso:
           x-transition:leave="transform transition ease-in-out duration-300"
           x-transition:leave-start="translate-x-0"
           x-transition:leave-end="translate-x-full"
-          class="w-screen {{ max_width|default:'max-w-md' }} border-l border-slate-800 bg-slate-900 shadow-2xl flex flex-col"
+          class="w-screen {{ max_width|default:'max-w-md' }} border-l border-secondary bg-white shadow-2xl flex flex-col text-black"
         >
           <!-- Cabeçalho -->
-          <div class="flex items-center justify-between border-b border-slate-800/80 px-6 py-5">
-            <h2 class="text-lg font-semibold text-slate-100">
+          <div class="flex items-center justify-between border-b border-secondary px-6 py-5">
+            <h2 class="text-lg font-semibold text-black">
               {{ title|default:"Painel Lateral" }}
             </h2>
             <button
               @click="slideOverOpen = false"
               type="button"
-              class="rounded-md p-1.5 text-slate-400 hover:bg-slate-800 hover:text-slate-200 transition"
+              class="rounded-md p-1.5 text-secondary-muted hover:bg-secondary hover:text-black transition"
             >
               <svg class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />
@@ -87,16 +87,16 @@ Exemplo de uso:
           </div>
 
           <!-- Conteúdo -->
-          <div class="flex-1 overflow-y-auto px-6 py-6 text-sm text-slate-300 space-y-4">
+          <div class="flex-1 overflow-y-auto px-6 py-6 text-sm text-black/75 space-y-4">
             {{ content|default:"Conteúdo do painel lateral." }}
           </div>
 
           <!-- Rodapé -->
-          <div class="border-t border-slate-800/80 px-6 py-4 flex justify-end gap-3 bg-slate-950/30">
+          <div class="border-t border-secondary px-6 py-4 flex justify-end gap-3 bg-surface-muted">
             <button
               @click="slideOverOpen = false"
               type="button"
-              class="rounded-lg border border-slate-700 px-4 py-2 text-sm font-semibold text-slate-300 hover:bg-slate-800 transition"
+              class="rounded-lg border border-secondary bg-white px-4 py-2 text-sm font-semibold text-black hover:bg-secondary transition"
             >
               Fechar
             </button>

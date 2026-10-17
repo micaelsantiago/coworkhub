@@ -5,29 +5,29 @@
 {% block content %}
   <main class="mx-auto flex min-h-screen max-w-3xl items-center px-6 py-16">
     <section>
-      <p class="mb-3 text-sm font-semibold uppercase tracking-widest text-emerald-400">Coworkhub</p>
-      <h1 class="text-4xl font-bold tracking-tight sm:text-6xl">Ambiente local pronto.</h1>
-      <p class="mt-6 max-w-2xl text-lg leading-8 text-slate-300">
+      <p class="mb-3 text-sm font-bold uppercase tracking-widest text-primary">Coworkhub</p>
+      <h1 class="text-4xl font-bold tracking-tight text-black sm:text-6xl">Ambiente local pronto.</h1>
+      <p class="mt-6 max-w-2xl text-lg leading-8 text-black/70">
         Django, PostgreSQL, Redis, Celery, HTMX, Alpine.js e Tailwind CSS estão conectados.
         Os módulos de domínio estão preparados para as próximas etapas, sem regras de negócio.
       </p>
       <!-- Demonstração de Componentes Reutilizáveis -->
       <div class="mt-8 space-y-6">
         <div class="flex flex-wrap items-center gap-3">
-          {% include "components/badge.html" with text="Ambiente Local" variant="success" dot=True %}
-          {% include "components/badge.html" with text="Pines UI" variant="info" %}
-          {% include "components/badge.html" with text="Tailwind v4" variant="neutral" %}
+          {% include "components/badge.html" with text="Principal (#b85c38)" variant="primary" dot=True %}
+          {% include "components/badge.html" with text="Secundária (#E5E7EB)" variant="secondary" %}
+          {% include "components/badge.html" with text="Preto (#000000)" variant="neutral" %}
         </div>
 
         <div class="flex flex-wrap items-center gap-4" x-data="{ checked: false }">
           <button
-            class="rounded-lg bg-emerald-400 px-4 py-2 font-semibold text-slate-950 transition hover:bg-emerald-300 text-sm"
+            class="rounded-lg bg-primary px-4 py-2 font-semibold text-white transition hover:bg-primary-hover text-sm shadow-xs"
             type="button"
             @click="checked = !checked"
           >
             Testar Alpine.js
           </button>
-          <span class="self-center text-emerald-300 text-sm" x-show="checked" x-cloak>Funcionando.</span>
+          <span class="self-center text-primary text-sm font-medium" x-show="checked" x-cloak>Funcionando.</span>
 
           <!-- Modal Reutilizável -->
           {% include "components/modal.html" with modal_id="demo-modal" title="Modal Reutilizável (Pines UI)" trigger_text="Abrir Modal" content="Este modal foi extraído para templates/components/modal.html. Suporta foco acessível (focus-trap), fechamento com Esc ou clique fora, e parâmetros dinâmicos via Django." %}
@@ -39,15 +39,15 @@
           <button
             @click="$dispatch('toast', { message: 'Notificação do Coworkhub via Alpine/HTMX!', type: 'success' })"
             type="button"
-            class="rounded-lg border border-slate-700 bg-slate-800/80 px-4 py-2 text-sm font-semibold text-slate-200 transition hover:bg-slate-700 hover:text-white"
+            class="rounded-lg border border-secondary bg-white px-4 py-2 text-sm font-semibold text-black transition hover:bg-secondary"
           >
             Disparar Notificação (Toast)
           </button>
         </div>
 
         <!-- Demonstração do Componente de Botões -->
-        <div class="pt-4 border-t border-slate-800/60">
-          <p class="text-xs font-semibold uppercase tracking-wider text-slate-400 mb-3">Variantes do Componente de Botão</p>
+        <div class="pt-4 border-t border-secondary">
+          <p class="text-xs font-semibold uppercase tracking-wider text-black/60 mb-3">Variantes do Componente de Botão</p>
           <div class="flex flex-wrap items-center gap-3">
             {% include "components/button.html" with text="Botão Primário" variant="primary" %}
             {% include "components/button.html" with text="Botão Secundário" variant="secondary" %}

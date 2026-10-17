@@ -11,30 +11,38 @@ Exemplo de uso:
 <span
   class="inline-flex items-center gap-1.5 rounded-full px-2.5 py-0.5 text-xs font-medium border
   {% if variant == 'danger' %}
-    border-rose-500/20 bg-rose-500/10 text-rose-300
+    border-rose-200 bg-rose-50 text-rose-700
   {% elif variant == 'warning' %}
-    border-amber-500/20 bg-amber-500/10 text-amber-300
+    border-amber-200 bg-amber-50 text-amber-700
   {% elif variant == 'info' %}
-    border-sky-500/20 bg-sky-500/10 text-sky-300
+    border-sky-200 bg-sky-50 text-sky-700
   {% elif variant == 'neutral' %}
-    border-slate-700 bg-slate-800 text-slate-300
+    border-secondary bg-surface-muted text-black/70
+  {% elif variant == 'secondary' %}
+    border-secondary bg-secondary text-black
+  {% elif variant == 'success' %}
+    border-emerald-200 bg-emerald-50 text-emerald-700
   {% else %}
-    border-emerald-500/20 bg-emerald-500/10 text-emerald-300
+    border-primary/20 bg-primary/10 text-primary
   {% endif %}"
 >
   {% if dot %}
     <span
       class="h-1.5 w-1.5 rounded-full
       {% if variant == 'danger' %}
-        bg-rose-400
+        bg-rose-500
       {% elif variant == 'warning' %}
-        bg-amber-400
+        bg-amber-500
       {% elif variant == 'info' %}
-        bg-sky-400
+        bg-sky-500
       {% elif variant == 'neutral' %}
-        bg-slate-400
+        bg-secondary-muted
+      {% elif variant == 'secondary' %}
+        bg-black/60
+      {% elif variant == 'success' %}
+        bg-emerald-500
       {% else %}
-        bg-emerald-400
+        bg-primary
       {% endif %}"
     ></span>
   {% endif %}
