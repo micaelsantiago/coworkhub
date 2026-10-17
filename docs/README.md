@@ -1,6 +1,6 @@
 # Coworkhub: documentação do projeto
 
-Esta pasta concentra o contexto de produto, domínio, arquitetura e operação do Coworkhub.
+Esta pasta concentra o contexto de produto, domínio, arquitetura, operação e fluxo de desenvolvimento do Coworkhub.
 
 ## Resumo
 
@@ -17,6 +17,7 @@ Cada empresa de coworking é um tenant e pode possuir uma ou mais unidades. O mo
 | [`dominio.md`](dominio.md) | Vocabulário, entidades e regras centrais do negócio |
 | [`arquitetura.md`](arquitetura.md) | Decisões de software e organização da aplicação |
 | [`infraestrutura.md`](infraestrutura.md) | Hospedagem, segurança, backup e operação |
+| [`agentes-e-skills.md`](agentes-e-skills.md) | Agentes especializados, catálogo de skills e fluxo OpenSpec |
 
 ## Decisões já tomadas
 
