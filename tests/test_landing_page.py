@@ -14,9 +14,13 @@ def test_landing_page_renders_successfully(client):
 
     assert response.status_code == 200
     html = response.content.decode("utf-8")
-    assert "Acabe com os conflitos de sala" in html
-    assert "Criar meu espaço" in html
-    assert "Plano Operação" in html
+    assert 'href="#main-content"' in html
+    assert 'id="main-content"' in html
+    assert 'id="hero-signup"' in html
+    assert 'hx-post="/check-subdomain/"' in html
+    assert 'hx-indicator="#subdomain-loading"' in html
+    assert 'aria-controls="faq-answer-1"' in html
+    assert "Verificar meu endereço" in html
     assert "logotipo-lightmode.svg" in html
     assert "logo.svg" in html
 
