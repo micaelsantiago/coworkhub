@@ -1,32 +1,44 @@
 schema: spec-driven
 
-# Project context (optional)
-# This is shown to AI when creating artifacts.
-# Add your tech stack, conventions, style guides, domain knowledge, etc.
-# Example:
-#   context: |
-#     Tech stack: TypeScript, React, Node.js
-#     We use conventional commits
-#     Domain: e-commerce platform
+context: |
+  Coworkhub is a Docker-first Django 5.2 monolith running Python 3.13,
+  PostgreSQL, Redis and Celery. The web interface is server-rendered with
+  Django templates and HTMX; Alpine.js is reserved for small interactions.
 
-# Per-artifact rules (optional)
-# Add custom rules for specific artifacts.
-# Example:
-#   rules:
-#     proposal:
-#       - Keep proposals under 500 words
-#       - Always include a "Non-goals" section
-#     tasks:
-#       - Break tasks into chunks of max 2 hours
+  Read docs/mvp.md and docs/dominio.md for product and domain decisions.
+  Read docs/arquitetura.md for app boundaries and implementation constraints.
+  That document describes target architecture as well as existing behavior, so
+  verify the current source and tests before treating an example as implemented.
 
-# Per-operation guidance (optional)
-# Add advisory guidance for how apply and archive work should be conducted.
-# This is separate from artifact rules above.
-# Example:
-#   operations:
-#     apply:
-#       guidance:
-#         - Keep test summaries concise
-#     archive:
-#       guidance:
-#         - Summarize the archive outcome before finishing
+  Use services.py for use-case coordination, selectors.py for complex reads and
+  views for request orchestration. Enforce business integrity in backend code
+  and PostgreSQL constraints. Tenant-aware work must follow the fail-closed
+  design in docs/arquitetura.md sections 4-5, including explicit Celery tenant
+  context, cross-tenant database protection and isolation tests.
+
+  platform_billing is Coworkhub's SaaS subscription for a tenant;
+  member_billing is the coworking's billing of its members. Keep them separate.
+
+  Full verification is make lint followed by make test. Model changes require
+  committed migrations. Environment variable declarations belong in
+  .env.example and settings in the appropriate config/settings layer.
+
+rules:
+  proposal:
+    - Distinguish observed current behavior from target behavior described in docs.
+    - State tenant-isolation impact when the change reads or writes tenant-owned data.
+  design:
+    - Keep the server-rendered architecture unless the proposal explicitly changes that constraint.
+    - Identify database constraints and migration strategy for model changes.
+  tasks:
+    - Include focused tests and end with make lint followed by make test.
+    - Include migration generation and verification when models change.
+
+operations:
+  apply:
+    guidance:
+      - Follow AGENTS.md and implement one focused task at a time.
+      - Use the tdd skill at pre-agreed seams where behavior can be tested first.
+  archive:
+    guidance:
+      - Archive only after implementation and QA are complete.
