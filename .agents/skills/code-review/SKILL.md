@@ -8,9 +8,12 @@ Two-axis review of the diff between `HEAD` and a fixed point the user supplies:
 - **Standards**: does the code conform to this repo's documented coding standards?
 - **Spec**: does the code faithfully implement the originating issue / spec?
 
-Both axes run as **parallel sub-agents** so they don't pollute each other's context, then this skill aggregates their findings.
+Both axes run as named **parallel sub-agents** so they don't pollute each other's context, then this skill aggregates their findings:
 
-The issue tracker should have been provided to you. If not, tell the user to run `/setup-matt-pocock-skills`.
+- `agente-qa-padroes` owns the Standards axis.
+- `agente-qa-especificacao` owns the Spec axis.
+
+OpenSpec is the canonical spec source when this repository has an `openspec/` root. An issue or standalone spec remains valid when the change was not planned through OpenSpec.
 
 ## Process
 
@@ -26,10 +29,12 @@ Before going further, confirm the fixed point resolves (`git rev-parse <fixed-po
 
 Look for the originating spec, in this order:
 
-1. Issue references in the commit messages (`#123`, `Closes #45`, GitLab `!67`, etc.), fetched via the workflow in the tracker doc.
-2. A path the user passed as an argument.
-3. A spec file under `docs/`, `specs/`, or `.scratch/` matching the branch name or feature.
-4. If nothing is found, ask the user where the spec is. If they say there isn't one, the **Spec** sub-agent will skip and report "no spec available".
+1. An OpenSpec change named by the user or established in the conversation. Resolve its artifact paths with `openspec status --change <name> --json` and use every existing proposal, spec, design, and task file relevant to the implementation.
+2. An active OpenSpec change matching the branch name or feature. Use `openspec list --json` to discover candidates; do not guess when more than one candidate is plausible.
+3. A path the user passed as an argument.
+4. Issue references in the commit messages (`#123`, `Closes #45`, GitLab `!67`, etc.), fetched through the repository's configured tracker when one exists.
+5. A spec file under `docs/`, `specs/`, or `.scratch/` matching the branch name or feature.
+6. If nothing is found, ask the user where the spec is. If they say there isn't one, the **Spec** sub-agent will skip and report "no spec available".
 
 ### 3. Identify the standards sources
 
@@ -55,9 +60,9 @@ Each smell reads *what it is* → *how to fix*; match it against the diff:
 - **Middle Man**: a class or function that mostly just delegates onward. → cut it, call the real target direct.
 - **Refused Bequest**: a subclass or implementer that ignores or overrides most of what it inherits. → drop the inheritance, use composition.
 
-### 4. Spawn both sub-agents in parallel
+### 4. Spawn both named sub-agents in parallel
 
-Issue both sub-agent calls together, in the foreground, and aggregate the reports they return.
+Issue calls to `agente-qa-padroes` and `agente-qa-especificacao` together, in the foreground, and aggregate the reports they return. Do not substitute generic agents when these named agents are available.
 
 **Standards sub-agent prompt** should include:
 
