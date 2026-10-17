@@ -13,9 +13,12 @@ def test_landing_page_renders_successfully(client):
     response = client.get(url)
 
     assert response.status_code == 200
-    assert "Acabe com os conflitos de sala" in response.content.decode("utf-8")
-    assert "Criar meu espaço" in response.content.decode("utf-8")
-    assert "Plano Operação" in response.content.decode("utf-8")
+    html = response.content.decode("utf-8")
+    assert "Acabe com os conflitos de sala" in html
+    assert "Criar meu espaço" in html
+    assert "Plano Operação" in html
+    assert "logotipo-lightmode.svg" in html
+    assert "logo.svg" in html
 
 
 def test_check_subdomain_valid(client):
