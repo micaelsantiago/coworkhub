@@ -90,6 +90,8 @@ qa-padroes      qa-especificacao
 
 Nem toda mudança passa por todas as etapas. Descoberta pode ser dispensada quando o comportamento desejado já está claro. Documentação entra somente quando a mudança afeta material que usuários, operadores ou futuros desenvolvedores precisam consultar.
 
+Este fluxo de trabalho acontece em uma branch semântica criada a partir da `main`. A promoção passa primeiro pela `develop` para validação no sandbox e depois pela `main` para produção, conforme [`fluxo-de-desenvolvimento.md`](fluxo-de-desenvolvimento.md).
+
 ### 3.1 Descobrir
 
 Use `agente-produto` quando ainda houver incerteza sobre problema, escopo, atores ou regras.
