@@ -3,6 +3,6 @@
 
   "permissions": [
     { "action": "external_directory", "resource": "*", "effect": "ask" },
-    { "action": "shell", "resource": "git push *", "effect": "deny" }
+    { "action": "shell", "resource": "git push *", "effect": "ask" }
   ]
 }

@@ -272,7 +272,7 @@ Elas formam ou dependem de um segundo fluxo baseado em issue tracker. Misturá-l
 - `agente-docs` não edita implementação nem artefatos OpenSpec.
 - `agente-pesquisa` escreve somente em `docs/research/`.
 - Acesso fora do projeto pede confirmação.
-- `git push` é bloqueado pela configuração do projeto.
+- `git push` sempre pede confirmação explícita antes de executar.
 - Segredos ficam em variáveis de ambiente ou mecanismos de autenticação, nunca em prompts, documentação ou arquivos versionados.
 
 Permissões são barreiras técnicas, mas não substituem a revisão humana de migrations, segurança multi-tenant e ações operacionais irreversíveis.
