@@ -1,74 +1,81 @@
 {% extends "base.html" %}
 {% load static %}
 
-{% block title %}Coworkhub · Gestão de Reservas e Espaços para Coworkings{% endblock %}
+{% block title %}Coworkhub · Reservas organizadas para o seu coworking{% endblock %}
 
 {% block content %}
-<div class="relative overflow-hidden bg-white text-black selection:bg-primary/20 selection:text-primary">
+<div class="min-w-0 overflow-x-hidden bg-white text-slate-900 selection:bg-primary/20 selection:text-primary">
+  <!-- Skip Link for Accessibility -->
+  <a
+    href="#main-content"
+    class="fixed left-4 top-3 z-50 -translate-y-24 rounded-lg bg-slate-900 px-4 py-3 text-sm font-semibold text-white shadow-xl transition-transform duration-150 focus-visible:translate-y-0 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary focus-visible:ring-offset-2"
+  >
+    Ir para o conteúdo
+  </a>
 
-  <!-- ========================================================================= -->
-  <!-- 1. HEADER / NAVBAR                                                        -->
-  <!-- ========================================================================= -->
+  <!-- Header / Navbar -->
   <header class="sticky top-0 z-40 border-b border-surface-border bg-white/95 backdrop-blur-md">
-    <div class="mx-auto flex max-w-7xl items-center justify-between px-4 py-3.5 sm:px-6 lg:px-8">
-      <a href="{% url 'home' %}" class="flex items-center group focus:outline-hidden focus:ring-2 focus:ring-primary focus:ring-offset-2 rounded-lg" aria-label="Coworkhub - Início">
+    <div class="mx-auto flex min-h-16 max-w-7xl items-center justify-between gap-4 px-4 sm:px-6 lg:px-8">
+      <a
+        href="{% url 'home' %}"
+        class="inline-flex min-h-11 items-center rounded-lg focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary focus-visible:ring-offset-2"
+        aria-label="Coworkhub, página inicial"
+      >
         <img
           src="{% static 'images/logotipo-lightmode.svg' %}"
           alt="Coworkhub"
-          class="h-7 sm:h-8 w-auto transition-opacity group-hover:opacity-90"
           width="148"
           height="32"
+          fetchpriority="high"
+          class="h-7 w-auto sm:h-8"
         >
       </a>
 
-      <nav class="hidden md:flex items-center gap-8 text-sm font-medium text-black/70">
-        <a href="#como-funciona" class="hover:text-primary transition-colors">Como funciona</a>
-        <a href="#comparativo" class="hover:text-primary transition-colors">Por que Coworkhub</a>
-        <a href="#recursos" class="hover:text-primary transition-colors">Recursos</a>
-        <a href="#precos" class="hover:text-primary transition-colors">Preço</a>
-        <a href="#faq" class="hover:text-primary transition-colors">Dúvidas</a>
+      <nav class="hidden items-center gap-1 text-sm font-medium text-slate-600 lg:flex" aria-label="Navegação principal">
+        <a href="#como-funciona" class="rounded-lg px-3 py-2 transition-colors hover:text-primary focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary">Como funciona</a>
+        <a href="#beneficios" class="rounded-lg px-3 py-2 transition-colors hover:text-primary focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary">Vantagens</a>
+        <a href="#recursos" class="rounded-lg px-3 py-2 transition-colors hover:text-primary focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary">Recursos</a>
+        <a href="#oferta" class="rounded-lg px-3 py-2 transition-colors hover:text-primary focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary">Oferta</a>
+        <a href="#faq" class="rounded-lg px-3 py-2 transition-colors hover:text-primary focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary">Dúvidas</a>
       </nav>
 
       <div class="flex items-center gap-3">
         <a
           href="#hero-signup"
-          class="inline-flex items-center justify-center rounded-lg bg-primary px-4 py-2 text-sm font-semibold text-white shadow-xs transition hover:bg-primary-hover focus:outline-hidden focus:ring-2 focus:ring-primary focus:ring-offset-2"
+          class="inline-flex min-h-11 shrink-0 items-center justify-center rounded-lg bg-primary px-4 py-2 text-sm font-semibold text-white shadow-xs transition-all hover:bg-primary-hover hover:shadow-md focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary focus-visible:ring-offset-2 active:scale-[0.99] sm:px-5"
         >
-          Testar 7 dias grátis
+          Verificar endereço
         </a>
       </div>
     </div>
   </header>
 
-  <main>
-    <!-- ======================================================================= -->
-    <!-- 2. HERO SECTION                                                         -->
-    <!-- ======================================================================= -->
-    <section id="hero-signup" class="relative pt-12 pb-16 md:pt-20 md:pb-24 lg:pt-24 lg:pb-32">
+  <main id="main-content" tabindex="-1">
+    <!-- Hero Section -->
+    <section id="hero-signup" class="relative scroll-mt-20 border-b border-surface-border bg-gradient-to-b from-surface-muted/60 via-white to-white py-12 sm:py-16 lg:py-20">
       <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-        <div class="grid grid-cols-1 items-center gap-12 lg:grid-cols-12 lg:gap-8">
+        <div class="grid items-center gap-12 lg:grid-cols-[1fr_1.1fr] lg:gap-16">
           
-          <!-- Lado Esquerdo: Mensagem e Validador de Subdomínio -->
-          <div class="lg:col-span-7 space-y-6 text-center lg:text-left">
-            <div class="inline-flex items-center gap-2 rounded-full border border-primary/20 bg-primary-subtle px-3 py-1 text-xs font-semibold text-primary">
-              <span class="h-1.5 w-1.5 rounded-full bg-primary animate-pulse"></span>
-              Operação e reservas para coworkings independentes
+          <!-- Coluna Esquerda: Proposta e Validação -->
+          <div class="landing-intro flex flex-col justify-center">
+            <div class="mb-5 inline-flex w-fit items-center gap-2 rounded-full border border-primary/25 bg-primary-50 px-3.5 py-1.5 text-xs font-semibold text-primary">
+              <span class="relative flex h-2 w-2">
+                <span class="absolute inline-flex h-full w-full animate-ping rounded-full bg-primary opacity-75"></span>
+                <span class="relative inline-flex h-2 w-2 rounded-full bg-primary"></span>
+              </span>
+              Plataforma de gestão para coworkings independentes
             </div>
 
-            <h1 class="text-4xl font-bold tracking-tight text-black sm:text-5xl lg:text-6xl text-balance">
-              Acabe com os conflitos de sala e as mensagens no WhatsApp.
+            <h1 class="text-balance text-4xl font-extrabold leading-[1.08] tracking-[-0.04em] text-slate-900 sm:text-5xl lg:text-6xl">
+              Reservas de salas e mesas sem complicação.
             </h1>
 
-            <p class="mx-auto max-w-2xl text-base sm:text-lg leading-relaxed text-black/75 lg:mx-0">
-              Centralize a disponibilidade de salas e mesas do seu coworking em um só lugar. Seus membros consultam horários e reservam por conta própria, respeitando os limites de cada plano.
+            <p class="mt-6 max-w-xl text-pretty text-base leading-relaxed text-slate-600 sm:text-lg">
+              Centralize a disponibilidade de salas, cabines e mesas em uma agenda em tempo real. Seus membros reservam direto pelo celular e as regras do plano são aplicadas na hora.
             </p>
 
-            <!-- Card de Simulação e Validação de Subdomínio (HTMX) -->
-            <div class="mt-8 rounded-2xl border border-surface-border bg-surface-muted p-4 sm:p-6 shadow-xs text-left max-w-xl mx-auto lg:mx-0">
-              <label for="subdomain-input" class="block text-xs font-semibold uppercase tracking-wider text-black/70 mb-2">
-                Comece pelo seu endereço exclusivo
-              </label>
-
+            <!-- Card Interativo de Validação HTMX -->
+            <div class="landing-intro-delay mt-8 rounded-2xl border border-surface-border bg-white p-5 shadow-sm sm:p-6">
               <form
                 method="post"
                 action="{% url 'check_subdomain' %}"
@@ -76,621 +83,728 @@
                 hx-trigger="input changed delay:350ms, search"
                 hx-target="#subdomain-feedback"
                 hx-swap="outerHTML"
+                hx-indicator="#subdomain-loading"
+                hx-disabled-elt="find button"
                 hx-headers='{"X-CSRFToken": "{{ csrf_token }}"}'
-                class="space-y-3"
               >
                 {% csrf_token %}
-                <div class="flex flex-col sm:flex-row items-stretch gap-2">
-                  <div class="relative flex flex-1 items-center rounded-lg border border-surface-border bg-white focus-within:border-primary focus-within:ring-2 focus-within:ring-primary/20 transition-all shadow-2xs">
+                <label for="subdomain-input" class="mb-2 block text-xs font-bold uppercase tracking-wider text-slate-700">
+                  Garanta o endereço exclusivo do seu espaço
+                </label>
+                
+                <div class="flex flex-col gap-2.5 sm:flex-row">
+                  <div class="flex min-h-12 min-w-0 flex-1 items-center rounded-xl border border-slate-300 bg-white transition-all focus-within:border-primary focus-within:ring-4 focus-within:ring-primary/10">
+                    <span class="select-none pl-3.5 text-slate-400 font-mono text-sm" aria-hidden="true">https://</span>
                     <input
                       type="text"
                       id="subdomain-input"
                       name="subdomain"
-                      placeholder="seu-coworking"
+                      placeholder="seu-espaco"
                       autocomplete="off"
-                      class="w-full bg-transparent px-3.5 py-2.5 text-sm sm:text-base font-medium text-black placeholder:text-black/40 focus:outline-hidden"
+                      autocapitalize="none"
+                      spellcheck="false"
+                      class="min-w-0 flex-1 bg-transparent py-3 pl-1 pr-1 font-mono text-base font-semibold text-slate-900 placeholder:font-sans placeholder:font-normal placeholder:text-slate-400 focus:outline-none"
+                      aria-describedby="subdomain-feedback"
                       required
                     >
-                    <span class="pr-3 text-xs sm:text-sm font-semibold text-black/50 select-none">
-                      .coworkhub.com.br
-                    </span>
+                    <span class="shrink-0 select-none pr-3 text-xs font-bold text-slate-500 sm:text-sm" translate="no">.coworkhub.com.br</span>
                   </div>
 
                   <button
                     type="submit"
-                    class="inline-flex items-center justify-center rounded-lg bg-primary px-5 py-2.5 text-sm font-semibold text-white shadow-xs transition hover:bg-primary-hover focus:outline-hidden focus:ring-2 focus:ring-primary shrink-0"
+                    class="inline-flex min-h-12 shrink-0 items-center justify-center gap-2 rounded-xl bg-slate-900 px-5 text-sm font-semibold text-white shadow-xs transition-all hover:bg-primary hover:shadow-md focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary focus-visible:ring-offset-2 active:scale-[0.99] disabled:cursor-wait disabled:opacity-70"
                   >
-                    <span>Criar meu espaço</span>
-                    <svg class="ml-1.5 h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <span>Verificar meu endereço</span>
+                    <svg class="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                       <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 5l7 7m0 0l-7 7m7-7H3" />
                     </svg>
                   </button>
                 </div>
 
-                <!-- Resposta do HTMX renderizada aqui -->
-                {% include "components/subdomain_check_result.html" with result=None %}
+                <div class="mt-3.5 min-h-8 flex items-center justify-between gap-3">
+                  {% include "components/subdomain_check_result.html" with result=None %}
+                  <span id="subdomain-loading" class="htmx-indicator inline-flex items-center gap-2 text-xs font-medium text-slate-500" role="status">
+                    <svg class="h-3.5 w-3.5 animate-spin text-primary" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
+                      <circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"></circle>
+                      <path class="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
+                    </svg>
+                    Verificando disponibilidade…
+                  </span>
+                </div>
               </form>
 
-              <div class="mt-4 flex flex-wrap items-center gap-4 border-t border-surface-border pt-3.5 text-xs text-black/60">
-                <span class="flex items-center gap-1.5">
-                  <svg class="h-3.5 w-3.5 text-primary" fill="currentColor" viewBox="0 0 20 20">
-                    <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd" />
-                  </svg>
-                  7 dias de teste grátis
-                </span>
-                <span class="flex items-center gap-1.5">
-                  <svg class="h-3.5 w-3.5 text-primary" fill="currentColor" viewBox="0 0 20 20">
-                    <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd" />
-                  </svg>
-                  Subdomínio ativado na hora
-                </span>
-                <span class="flex items-center gap-1.5">
-                  <svg class="h-3.5 w-3.5 text-primary" fill="currentColor" viewBox="0 0 20 20">
-                    <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd" />
-                  </svg>
-                  Cancele quando quiser com um clique
-                </span>
-              </div>
-            </div>
-          </div>
-
-          <!-- Lado Direito: Mock Visual Autêntico da Grade de Reservas -->
-          <div class="lg:col-span-5">
-            <div class="relative mx-auto w-full max-w-lg lg:max-w-none">
-              <!-- Moldura do Sistema -->
-              <div class="overflow-hidden rounded-2xl border border-surface-border bg-white shadow-xl ring-1 ring-black/5">
-                <!-- Barra superior do mock -->
-                <div class="flex items-center justify-between border-b border-surface-border bg-surface-muted px-4 py-3">
-                  <div class="flex items-center gap-2">
-                    <span class="h-2.5 w-2.5 rounded-full bg-red-400"></span>
-                    <span class="h-2.5 w-2.5 rounded-full bg-amber-400"></span>
-                    <span class="h-2.5 w-2.5 rounded-full bg-emerald-400"></span>
-                    <span class="ml-2 font-mono text-xs text-black/50">estacao.coworkhub.com.br</span>
-                  </div>
-                  <span class="rounded bg-primary/10 px-2 py-0.5 text-[11px] font-semibold text-primary">Unidade Principal</span>
-                </div>
-
-                <!-- Conteúdo da Agenda de Salas e Mesas -->
-                <div class="p-4 sm:p-5 space-y-4">
-                  <div class="flex items-center justify-between">
-                    <div>
-                      <h4 class="text-sm font-bold text-black">Grade de Hoje · 16 de Outubro</h4>
-                      <p class="text-xs text-black/60">Disponibilidade em blocos de 30 minutos</p>
-                    </div>
-                    <span class="text-xs font-medium text-emerald-700 bg-emerald-50 border border-emerald-200 rounded-md px-2 py-1 flex items-center gap-1">
-                      <span class="h-1.5 w-1.5 rounded-full bg-emerald-500"></span>
-                      Sem conflitos
-                    </span>
-                  </div>
-
-                  <!-- Linhas da Grade de Recursos -->
-                  <div class="space-y-2.5">
-                    <!-- Sala Araucária -->
-                    <div class="rounded-lg border border-surface-border p-2.5 bg-white">
-                      <div class="flex items-center justify-between text-xs font-semibold mb-2">
-                        <span class="text-black">Sala Araucária (8 pessoas)</span>
-                        <span class="text-black/50">09:00 - 12:00</span>
-                      </div>
-                      <div class="grid grid-cols-6 gap-1 text-[11px]">
-                        <div class="rounded bg-black/10 p-1 text-center font-medium text-black/60" title="Ocupada">09:00</div>
-                        <div class="rounded bg-black/10 p-1 text-center font-medium text-black/60" title="Ocupada">09:30</div>
-                        <div class="col-span-2 rounded bg-primary/15 border border-primary/30 p-1 text-center font-semibold text-primary truncate" title="Reunião Sprint">
-                          10:00 · Reunião
-                        </div>
-                        <div class="rounded border border-dashed border-emerald-300 bg-emerald-50/50 p-1 text-center font-medium text-emerald-800" title="Livre">11:00</div>
-                        <div class="rounded border border-dashed border-emerald-300 bg-emerald-50/50 p-1 text-center font-medium text-emerald-800" title="Livre">11:30</div>
-                      </div>
-                    </div>
-
-                    <!-- Sala Ipê -->
-                    <div class="rounded-lg border border-surface-border p-2.5 bg-white">
-                      <div class="flex items-center justify-between text-xs font-semibold mb-2">
-                        <span class="text-black">Cabine Call 01 (Individual)</span>
-                        <span class="text-black/50">14:00 - 16:00</span>
-                      </div>
-                      <div class="grid grid-cols-4 gap-1 text-[11px]">
-                        <div class="rounded border border-dashed border-emerald-300 bg-emerald-50/50 p-1 text-center font-medium text-emerald-800">14:00</div>
-                        <div class="col-span-2 rounded bg-primary/15 border border-primary/30 p-1 text-center font-semibold text-primary truncate">
-                          14:30 · Call Cliente
-                        </div>
-                        <div class="rounded border border-dashed border-emerald-300 bg-emerald-50/50 p-1 text-center font-medium text-emerald-800">15:30</div>
-                      </div>
-                    </div>
-
-                    <!-- Mesa Fixa 04 -->
-                    <div class="rounded-lg border border-surface-border p-2.5 bg-white">
-                      <div class="flex items-center justify-between text-xs font-semibold mb-2">
-                        <span class="text-black">Mesa 04 (Salão Compartilhado)</span>
-                        <span class="text-emerald-700 font-medium">Disponível o dia todo</span>
-                      </div>
-                      <div class="rounded bg-surface-muted p-2 flex items-center justify-between text-xs">
-                        <span class="text-black/70">Franquia do membro: <strong>16h restantes</strong></span>
-                        <span class="text-primary font-semibold">Reservar</span>
-                      </div>
-                    </div>
-                  </div>
-
-                  <!-- Toast Simulando Regra de Integridade -->
-                  <div class="flex items-center gap-2 rounded-lg bg-emerald-50 p-2.5 text-xs text-emerald-900 border border-emerald-200">
+              <div class="mt-4 border-t border-slate-100 pt-3.5">
+                <ul class="grid grid-cols-1 gap-2 text-xs text-slate-500 sm:grid-cols-2" aria-label="Informações de acesso">
+                  <li class="flex items-center gap-2">
                     <svg class="h-4 w-4 text-emerald-600 shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
+                      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M5 13l4 4L19 7" />
                     </svg>
-                    <span><strong>Garantia Fail-Closed:</strong> Bloqueio automático de sobreposições em tempo real.</span>
-                  </div>
-                </div>
+                    <span>100% web móvel (sem app para baixar)</span>
+                  </li>
+                  <li class="flex items-center gap-2">
+                    <svg class="h-4 w-4 text-emerald-600 shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M5 13l4 4L19 7" />
+                    </svg>
+                    <span>7 dias de teste grátis sem compromisso</span>
+                  </li>
+                </ul>
               </div>
             </div>
           </div>
 
-        </div>
-      </div>
-    </section>
-
-    <!-- ======================================================================= -->
-    <!-- 3. SEÇÃO DE CONTRASTE: HOJE VS. COM COWORKHUB                          -->
-    <!-- ======================================================================= -->
-    <section id="comparativo" class="border-t border-surface-border bg-surface-muted py-16 sm:py-24">
-      <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-        <div class="mx-auto max-w-3xl text-center space-y-4">
-          <h2 class="text-xs font-semibold uppercase tracking-wider text-primary">Operação sem atrito</h2>
-          <p class="text-3xl font-bold tracking-tight text-black sm:text-4xl text-balance">
-            Você não abriu um coworking para passar o dia conferindo planilhas.
-          </p>
-          <p class="text-base text-black/70 leading-relaxed">
-            Elimine a fricção diária de atender mensagens manuais e garanta que sua equipe tenha tempo para acolher membros e expandir a comunidade.
-          </p>
-        </div>
-
-        <div class="mt-12 grid grid-cols-1 gap-8 md:grid-cols-2 lg:gap-12">
-          
-          <!-- Como funciona hoje -->
-          <div class="rounded-2xl border border-red-200 bg-white p-6 sm:p-8 shadow-xs">
-            <div class="flex items-center gap-3 mb-6">
-              <span class="flex h-9 w-9 items-center justify-center rounded-lg bg-red-100 text-red-700">
-                <svg class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />
-                </svg>
-              </span>
-              <h3 class="text-lg font-bold text-black">Como sua operação é hoje</h3>
-            </div>
-            
-            <ul class="space-y-4 text-sm text-black/75">
-              <li class="flex items-start gap-3">
-                <span class="text-red-500 font-bold shrink-0">✕</span>
-                <span><strong>Mensagens a todo momento:</strong> Membros chamam no WhatsApp no meio da tarde para saber se tem sala às 15h.</span>
-              </li>
-              <li class="flex items-start gap-3">
-                <span class="text-red-500 font-bold shrink-0">✕</span>
-                <span><strong>Conflitos e constrangimento:</strong> Duas pessoas chegam na mesma sala porque a equipe anotou em agendas diferentes.</span>
-              </li>
-              <li class="flex items-start gap-3">
-                <span class="text-red-500 font-bold shrink-0">✕</span>
-                <span><strong>Planilhas desatualizadas:</strong> Horas de franquia perdidas quando um cancelamento de última hora não é registrado.</span>
-              </li>
-              <li class="flex items-start gap-3">
-                <span class="text-red-500 font-bold shrink-0">✕</span>
-                <span><strong>Dependência contínua:</strong> A recepção gasta horas preciosas administrando tarefas repetitivas de agendamento.</span>
-              </li>
-            </ul>
-          </div>
-
-          <!-- Com o Coworkhub -->
-          <div class="rounded-2xl border border-primary/30 bg-white p-6 sm:p-8 shadow-xs relative ring-1 ring-primary/10">
-            <div class="flex items-center gap-3 mb-6">
-              <span class="flex h-9 w-9 items-center justify-center rounded-lg bg-primary-subtle text-primary">
-                <svg class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" />
-                </svg>
-              </span>
-              <h3 class="text-lg font-bold text-black">Com o Coworkhub</h3>
-            </div>
-
-            <ul class="space-y-4 text-sm text-black/75">
-              <li class="flex items-start gap-3">
-                <span class="text-primary font-bold shrink-0">✓</span>
-                <span><strong>Autoatendimento pelo celular:</strong> O membro abre o link do seu espaço no navegador e reserva em 30 segundos.</span>
-              </li>
-              <li class="flex items-start gap-3">
-                <span class="text-primary font-bold shrink-0">✓</span>
-                <span><strong>Zero sobreposições:</strong> O motor de concorrência bloqueia colisões diretamente no banco de dados.</span>
-              </li>
-              <li class="flex items-start gap-3">
-                <span class="text-primary font-bold shrink-0">✓</span>
-                <span><strong>Regras e franquias claras:</strong> Débito automático do saldo e estorno transparente quando cancelado com mais de 2 horas.</span>
-              </li>
-              <li class="flex items-start gap-3">
-                <span class="text-primary font-bold shrink-0">✓</span>
-                <span><strong>Controle com tranquilidade:</strong> Membros independentes e sua equipe livre para focar no relacionamento e hospitalidade.</span>
-              </li>
-            </ul>
-          </div>
-
-        </div>
-      </div>
-    </section>
-
-    <!-- ======================================================================= -->
-    <!-- 4. PILARES DO PRODUTO (FUNCIONALIDADES ESSENCIAIS)                       -->
-    <!-- ======================================================================= -->
-    <section id="recursos" class="py-16 sm:py-24 bg-white border-t border-surface-border">
-      <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-        <div class="mx-auto max-w-3xl text-center space-y-4">
-          <h2 class="text-xs font-semibold uppercase tracking-wider text-primary">Recursos do MVP</h2>
-          <p class="text-3xl font-bold tracking-tight text-black sm:text-4xl text-balance">
-            Tudo o que uma operação de coworking precisa para funcionar bem.
-          </p>
-          <p class="text-base text-black/70">
-            Focado em resolver reservas com rigor, sem complexidades desnecessárias de ERPs pesados.
-          </p>
-        </div>
-
-        <div class="mt-12 grid grid-cols-1 gap-8 md:grid-cols-3">
-          
-          <!-- Card 1: Disponibilidade Garantida -->
-          <div class="rounded-2xl border border-surface-border p-6 sm:p-8 hover:border-primary/40 transition-colors bg-white shadow-2xs">
-            <div class="h-10 w-10 rounded-xl bg-primary-subtle text-primary flex items-center justify-center font-bold mb-5">
-              <svg class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z" />
-              </svg>
-            </div>
-            <h3 class="text-lg font-bold text-black mb-2">Agenda em blocos de 30 min</h3>
-            <p class="text-sm text-black/70 leading-relaxed">
-              Grade visual intuitiva com janelas de agendamento configuráveis (15 minutos a 30 dias à frente) e limite contínuo de até 4 horas por reserva para evitar bloqueios abusivos.
-            </p>
-          </div>
-
-          <!-- Card 2: Planos e Franquias -->
-          <div class="rounded-2xl border border-surface-border p-6 sm:p-8 hover:border-primary/40 transition-colors bg-white shadow-2xs">
-            <div class="h-10 w-10 rounded-xl bg-primary-subtle text-primary flex items-center justify-center font-bold mb-5">
-              <svg class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z" />
-              </svg>
-            </div>
-            <h3 class="text-lg font-bold text-black mb-2">Franquias e cancelamento justo</h3>
-            <p class="text-sm text-black/70 leading-relaxed">
-              Defina franquias de horas ou créditos mensais para cada membro. Cancelamentos com mais de 2 horas de antecedência devolvem o saldo automaticamente.
-            </p>
-          </div>
-
-          <!-- Card 3: Multi-unidades e Recursos -->
-          <div class="rounded-2xl border border-surface-border p-6 sm:p-8 hover:border-primary/40 transition-colors bg-white shadow-2xs">
-            <div class="h-10 w-10 rounded-xl bg-primary-subtle text-primary flex items-center justify-center font-bold mb-5">
-              <svg class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 21V5a2 2 0 00-2-2H7a2 2 0 00-2 2v16m14 0h2m-2 0h-5m-9 0H3m2 0h5M9 7h1m-1 4h1m4-4h1m-1 4h1m-5 10v-5a1 1 0 011-1h2a1 1 0 011 1v5m-4 0h4" />
-              </svg>
-            </div>
-            <h3 class="text-lg font-bold text-black mb-2">Salas, mesas e filiais</h3>
-            <p class="text-sm text-black/70 leading-relaxed">
-              Cadastre salas de reunião, cabines privativas e mesas numeradas. Gerencie uma ou mais unidades físicas sob a mesma marca e subdomínio exclusivo.
-            </p>
-          </div>
-
-        </div>
-      </div>
-    </section>
-
-    <!-- ======================================================================= -->
-    <!-- 5. COMO FUNCIONA (ONBOARDING EM 3 PASSOS)                              -->
-    <!-- ======================================================================= -->
-    <section id="como-funciona" class="border-t border-surface-border bg-surface-muted py-16 sm:py-24">
-      <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-        <div class="mx-auto max-w-3xl text-center space-y-4">
-          <h2 class="text-xs font-semibold uppercase tracking-wider text-primary">Implantação ágil</h2>
-          <p class="text-3xl font-bold tracking-tight text-black sm:text-4xl text-balance">
-            Seu coworking operacional em 10 minutos.
-          </p>
-          <p class="text-base text-black/70">
-            Sem treinamentos extensos, sem consultoria obrigatória e sem semanas de espera.
-          </p>
-        </div>
-
-        <div class="mt-12 grid grid-cols-1 gap-8 md:grid-cols-3">
-          
-          <div class="rounded-2xl border border-surface-border bg-white p-6 sm:p-8 shadow-xs">
-            <span class="inline-flex h-8 w-8 items-center justify-center rounded-lg bg-black text-white font-bold text-sm mb-4">
-              1
-            </span>
-            <h3 class="text-base font-bold text-black mb-2">Defina seu subdomínio</h3>
-            <p class="text-sm text-black/70 leading-relaxed">
-              Escolha o nome do seu coworking. Seu ambiente exclusivo em <code class="bg-surface-muted px-1 py-0.5 rounded text-primary">seuespaco.coworkhub.com.br</code> é provisionado instantaneamente.
-            </p>
-          </div>
-
-          <div class="rounded-2xl border border-surface-border bg-white p-6 sm:p-8 shadow-xs">
-            <span class="inline-flex h-8 w-8 items-center justify-center rounded-lg bg-black text-white font-bold text-sm mb-4">
-              2
-            </span>
-            <h3 class="text-base font-bold text-black mb-2">Cadastre salas e mesas</h3>
-            <p class="text-sm text-black/70 leading-relaxed">
-              Configure horários de funcionamento, capacidade das salas, posições de mesas fixas e regras de antecedência mínima.
-            </p>
-          </div>
-
-          <div class="rounded-2xl border border-surface-border bg-white p-6 sm:p-8 shadow-xs">
-            <span class="inline-flex h-8 w-8 items-center justify-center rounded-lg bg-black text-white font-bold text-sm mb-4">
-              3
-            </span>
-            <h3 class="text-base font-bold text-black mb-2">Convide seus membros</h3>
-            <p class="text-sm text-black/70 leading-relaxed">
-              Cadastre sua comunidade e envie os convites. Seus membros acessam pelo celular, definem a senha e realizam a primeira reserva.
-            </p>
-          </div>
-
-        </div>
-      </div>
-    </section>
-
-    <!-- ======================================================================= -->
-    <!-- 6. PREÇO TRANSPARENTE & TRIAL DE 7 DIAS                                 -->
-    <!-- ======================================================================= -->
-    <section id="precos" class="py-16 sm:py-24 bg-white border-t border-surface-border">
-      <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-        <div class="mx-auto max-w-3xl text-center space-y-4">
-          <h2 class="text-xs font-semibold uppercase tracking-wider text-primary">Assinatura Simples</h2>
-          <p class="text-3xl font-bold tracking-tight text-black sm:text-4xl text-balance">
-            Preço previsível para o seu negócio crescer.
-          </p>
-          <p class="text-base text-black/70">
-            Sem cobrança por quantidade de reservas, sem surpresas no fim do mês e sem taxa de implantação.
-          </p>
-        </div>
-
-        <div class="mt-12 mx-auto max-w-lg">
-          <div class="rounded-2xl border-2 border-primary bg-white p-8 shadow-lg relative ring-4 ring-primary/5">
-            <div class="flex items-center justify-between gap-4 mb-4">
-              <h3 class="text-xl font-bold text-black">Plano Operação</h3>
-              <span class="rounded-full bg-primary-subtle px-3 py-1 text-xs font-bold text-primary">
-                7 dias de teste grátis
-              </span>
-            </div>
-
-            <p class="text-sm text-black/70 mb-6">
-              Tudo o que você precisa para gerenciar unidades, salas, mesas e reservas de membros com autoatendimento.
-            </p>
-
-            <div class="flex items-baseline gap-2 mb-6 border-b border-surface-border pb-6">
-              <span class="text-4xl font-extrabold tracking-tight text-black">R$ 149</span>
-              <span class="text-sm font-semibold text-black/60">/mês por unidade</span>
-            </div>
-
-            <ul class="space-y-3.5 text-sm text-black/80 mb-8">
-              <li class="flex items-center gap-3">
-                <svg class="h-4 w-4 text-primary shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" />
-                </svg>
-                <span>Subdomínio exclusivo (ex: <code class="text-xs bg-surface-muted px-1 py-0.5 rounded">estacao.coworkhub.com.br</code>)</span>
-              </li>
-              <li class="flex items-center gap-3">
-                <svg class="h-4 w-4 text-primary shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" />
-                </svg>
-                <span>Salas de reunião e mesas numeradas ilimitadas</span>
-              </li>
-              <li class="flex items-center gap-3">
-                <svg class="h-4 w-4 text-primary shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" />
-                </svg>
-                <span>Membros e reservas ilimitadas</span>
-              </li>
-              <li class="flex items-center gap-3">
-                <svg class="h-4 w-4 text-primary shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" />
-                </svg>
-                <span>Controle automatizado de franquias de horas</span>
-              </li>
-              <li class="flex items-center gap-3">
-                <svg class="h-4 w-4 text-primary shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" />
-                </svg>
-                <span>Histórico auditável de reservas e cancelamentos</span>
-              </li>
-            </ul>
-
-            <a
-              href="#hero-signup"
-              class="w-full inline-flex items-center justify-center rounded-xl bg-primary px-6 py-3.5 text-base font-semibold text-white shadow-xs transition hover:bg-primary-hover focus:outline-hidden focus:ring-2 focus:ring-primary focus:ring-offset-2"
-            >
-              Começar teste de 7 dias
-            </a>
-
-            <p class="mt-4 text-center text-xs text-black/60 leading-relaxed">
-              Validação segura de cartão via gateway Asaas. Cancele com um clique até o 7º dia e nada será cobrado.
-            </p>
-          </div>
-        </div>
-      </div>
-    </section>
-
-    <!-- ======================================================================= -->
-    <!-- 7. PERGUNTAS FREQUENTES (FAQ COM ALPINE.JS)                             -->
-    <!-- ======================================================================= -->
-    <section id="faq" class="border-t border-surface-border bg-surface-muted py-16 sm:py-24" x-data="{ active: null }">
-      <div class="mx-auto max-w-4xl px-4 sm:px-6 lg:px-8">
-        <div class="mx-auto max-w-2xl text-center space-y-4 mb-12">
-          <h2 class="text-xs font-semibold uppercase tracking-wider text-primary">Tira-dúvidas</h2>
-          <p class="text-3xl font-bold tracking-tight text-black sm:text-4xl text-balance">
-            Perguntas frequentes
-          </p>
-          <p class="text-base text-black/70">
-            Respostas diretas sobre como a plataforma funciona na prática.
-          </p>
-        </div>
-
-        <div class="space-y-3">
-          
-          <!-- Pergunta 1 -->
-          <div class="rounded-xl border border-surface-border bg-white overflow-hidden shadow-2xs">
-            <button
-              type="button"
-              @click="active = (active === 1 ? null : 1)"
-              class="flex w-full items-center justify-between px-6 py-4 text-left font-semibold text-black hover:text-primary transition-colors text-base"
-              :aria-expanded="active === 1"
-            >
-              <span>Preciso cadastrar o cartão de crédito para iniciar o teste?</span>
-              <svg
-                class="h-5 w-5 shrink-0 transition-transform duration-200"
-                :class="{ 'rotate-180': active === 1 }"
-                fill="none"
-                viewBox="0 0 24 24"
-                stroke="currentColor"
-              >
-                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" />
-              </svg>
-            </button>
-            <div x-show="active === 1" x-collapse x-cloak class="px-6 pb-5 pt-1 text-sm text-black/75 leading-relaxed border-t border-surface-border/60">
-              Sim. Como o Coworkhub provisiona um subdomínio exclusivo e um banco de dados isolado na hora para o seu espaço, validamos o cartão no cadastro. Nenhuma cobrança é realizada durante os primeiros 7 dias, e você pode cancelar quando quiser com um clique.
-            </div>
-          </div>
-
-          <!-- Pergunta 2 -->
-          <div class="rounded-xl border border-surface-border bg-white overflow-hidden shadow-2xs">
-            <button
-              type="button"
-              @click="active = (active === 2 ? null : 2)"
-              class="flex w-full items-center justify-between px-6 py-4 text-left font-semibold text-black hover:text-primary transition-colors text-base"
-              :aria-expanded="active === 2"
-            >
-              <span>O Coworkhub cobra ou emite faturas para os meus membros?</span>
-              <svg
-                class="h-5 w-5 shrink-0 transition-transform duration-200"
-                :class="{ 'rotate-180': active === 2 }"
-                fill="none"
-                viewBox="0 0 24 24"
-                stroke="currentColor"
-              >
-                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" />
-              </svg>
-            </button>
-            <div x-show="active === 2" x-collapse x-cloak class="px-6 pb-5 pt-1 text-sm text-black/75 leading-relaxed border-t border-surface-border/60">
-              Não no MVP. O Coworkhub gerencia o direito de uso, as franquias de horas e as reservas operacionais. As mensalidades e planos continuam sendo cobrados pelo meio que você já usa habitualmente no seu coworking (PIX, boleto bancário ou máquina de cartão).
-            </div>
-          </div>
-
-          <!-- Pergunta 3 -->
-          <div class="rounded-xl border border-surface-border bg-white overflow-hidden shadow-2xs">
-            <button
-              type="button"
-              @click="active = (active === 3 ? null : 3)"
-              class="flex w-full items-center justify-between px-6 py-4 text-left font-semibold text-black hover:text-primary transition-colors text-base"
-              :aria-expanded="active === 3"
-            >
-              <span>Os membros precisam baixar algum aplicativo na loja?</span>
-              <svg
-                class="h-5 w-5 shrink-0 transition-transform duration-200"
-                :class="{ 'rotate-180': active === 3 }"
-                fill="none"
-                viewBox="0 0 24 24"
-                stroke="currentColor"
-              >
-                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" />
-              </svg>
-            </button>
-            <div x-show="active === 3" x-collapse x-cloak class="px-6 pb-5 pt-1 text-sm text-black/75 leading-relaxed border-t border-surface-border/60">
-              Não. A plataforma é uma aplicação web rápida, responsiva e moderna, que funciona direto no navegador de qualquer celular ou computador através do subdomínio do seu espaço, sem ocupar memória no aparelho do membro.
-            </div>
-          </div>
-
-          <!-- Pergunta 4 -->
-          <div class="rounded-xl border border-surface-border bg-white overflow-hidden shadow-2xs">
-            <button
-              type="button"
-              @click="active = (active === 4 ? null : 4)"
-              class="flex w-full items-center justify-between px-6 py-4 text-left font-semibold text-black hover:text-primary transition-colors text-base"
-              :aria-expanded="active === 4"
-            >
-              <span>Posso gerenciar mais de uma unidade física?</span>
-              <svg
-                class="h-5 w-5 shrink-0 transition-transform duration-200"
-                :class="{ 'rotate-180': active === 4 }"
-                fill="none"
-                viewBox="0 0 24 24"
-                stroke="currentColor"
-              >
-                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" />
-              </svg>
-            </button>
-            <div x-show="active === 4" x-collapse x-cloak class="px-6 pb-5 pt-1 text-sm text-black/75 leading-relaxed border-t border-surface-border/60">
-              Sim. Você pode cadastrar matriz e filiais sob a mesma conta e subdomínio, atribuindo salas, mesas e equipes com permissões específicas para cada unidade.
-            </div>
-          </div>
-
-          <!-- Pergunta 5 -->
-          <div class="rounded-xl border border-surface-border bg-white overflow-hidden shadow-2xs">
-            <button
-              type="button"
-              @click="active = (active === 5 ? null : 5)"
-              class="flex w-full items-center justify-between px-6 py-4 text-left font-semibold text-black hover:text-primary transition-colors text-base"
-              :aria-expanded="active === 5"
-            >
-              <span>Como funciona a política de cancelamento de reservas?</span>
-              <svg
-                class="h-5 w-5 shrink-0 transition-transform duration-200"
-                :class="{ 'rotate-180': active === 5 }"
-                fill="none"
-                viewBox="0 0 24 24"
-                stroke="currentColor"
-              >
-                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" />
-              </svg>
-            </button>
-            <div x-show="active === 5" x-collapse x-cloak class="px-6 pb-5 pt-1 text-sm text-black/75 leading-relaxed border-t border-surface-border/60">
-              Cancelamentos feitos com 2 horas ou mais de antecedência estornam 100% das horas de volta para o plano do membro automaticamente. Cancelamentos com menos de 2 horas liberam o espaço na agenda, mas mantém o débito das horas conforme a política da sua operação.
-            </div>
-          </div>
-
-        </div>
-      </div>
-    </section>
-
-    <!-- ======================================================================= -->
-    <!-- 8. CTA FINAL                                                            -->
-    <!-- ======================================================================= -->
-    <section class="border-t border-surface-border bg-black text-white py-16 sm:py-20">
-      <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 text-center space-y-6">
-        <h2 class="text-3xl font-bold tracking-tight sm:text-4xl lg:text-5xl text-balance">
-          Pronto para profissionalizar as reservas do seu coworking?
-        </h2>
-        <p class="mx-auto max-w-2xl text-base text-white/70">
-          Crie seu subdomínio agora e aproveite 7 dias completos para testar com sua equipe e membros.
-        </p>
-        <div class="pt-2">
-          <a
-            href="#hero-signup"
-            class="inline-flex items-center justify-center rounded-xl bg-primary px-8 py-3.5 text-base font-semibold text-white shadow-lg transition hover:bg-primary-hover focus:outline-hidden focus:ring-2 focus:ring-primary focus:ring-offset-2 focus:ring-offset-black"
+          <!-- Coluna Direita: Live Interactive Workspace Mockup -->
+          <div
+            class="landing-intro-late w-full"
+            x-data="{
+              activeCategory: 'all',
+              selectedSlot: null,
+              slots: {
+                'ipe-1030': { room: 'Sala Ipê', time: '10:30 - 11:30', duration: '1 hora', cost: '2 créditos de reunião' },
+                'cabine-1100': { room: 'Cabine 02', time: '11:00 - 12:00', duration: '1 hora', cost: '1 crédito avulso' },
+                'mesa-dia': { room: 'Mesa Flex 04', time: '09:00 - 18:00', duration: 'Diária completa', cost: 'Incluso no Plano Pro' }
+              }
+            }"
           >
-            Começar 7 dias grátis
-          </a>
+            <div class="overflow-hidden rounded-2xl border border-slate-200/90 bg-white shadow-[0_20px_60px_-15px_rgba(15,23,42,0.12)] ring-1 ring-slate-900/5">
+              
+              <!-- Janela: Barra de Título e Status -->
+              <div class="flex items-center justify-between border-b border-slate-100 bg-slate-50/80 px-4 py-3 sm:px-5">
+                <div class="flex items-center gap-2.5">
+                  <div class="flex gap-1.5" aria-hidden="true">
+                    <span class="h-2.5 w-2.5 rounded-full bg-slate-300"></span>
+                    <span class="h-2.5 w-2.5 rounded-full bg-slate-300"></span>
+                    <span class="h-2.5 w-2.5 rounded-full bg-slate-300"></span>
+                  </div>
+                  <span class="text-xs font-semibold text-slate-700">Painel Operacional · Unidade Centro</span>
+                </div>
+                
+                <div class="flex items-center gap-2">
+                  <span class="inline-flex items-center gap-1.5 rounded-full bg-emerald-100/70 px-2.5 py-1 text-[11px] font-semibold text-emerald-800">
+                    <span class="h-1.5 w-1.5 rounded-full bg-emerald-500 animate-pulse" aria-hidden="true"></span>
+                    Ao vivo
+                  </span>
+                  <span class="hidden text-xs font-medium text-slate-400 sm:inline">Hoje, 17 de Outubro</span>
+                </div>
+              </div>
+
+              <!-- Filtros Interativos com Alpine.js -->
+              <div class="flex items-center gap-1.5 border-b border-slate-100 bg-white px-4 py-2.5 sm:px-5 text-xs">
+                <button
+                  type="button"
+                  @click="activeCategory = 'all'"
+                  :class="activeCategory === 'all' ? 'bg-slate-900 text-white font-medium' : 'text-slate-600 hover:bg-slate-100'"
+                  class="rounded-lg px-2.5 py-1 transition-colors"
+                >
+                  Todos
+                </button>
+                <button
+                  type="button"
+                  @click="activeCategory = 'reuniao'"
+                  :class="activeCategory === 'reuniao' ? 'bg-slate-900 text-white font-medium' : 'text-slate-600 hover:bg-slate-100'"
+                  class="rounded-lg px-2.5 py-1 transition-colors"
+                >
+                  Salas de Reunião
+                </button>
+                <button
+                  type="button"
+                  @click="activeCategory = 'cabine'"
+                  :class="activeCategory === 'cabine' ? 'bg-slate-900 text-white font-medium' : 'text-slate-600 hover:bg-slate-100'"
+                  class="rounded-lg px-2.5 py-1 transition-colors"
+                >
+                  Cabines de Call
+                </button>
+              </div>
+
+              <!-- Grid da Linha do Tempo -->
+              <div class="overflow-x-auto p-4 sm:p-5">
+                <!-- Cabeçalho de Horas -->
+                <div class="grid grid-cols-[minmax(5.5rem,1.2fr)_repeat(4,minmax(3rem,1fr))] gap-2 border-b border-slate-100 pb-2.5 text-center text-[11px] font-semibold text-slate-400">
+                  <span class="text-left font-medium text-slate-500">Espaço</span>
+                  <span>09:00</span>
+                  <span>10:30</span>
+                  <span>12:00</span>
+                  <span>14:00</span>
+                </div>
+
+                <!-- Linhas de Recursos -->
+                <div class="divide-y divide-slate-100 text-xs">
+                  
+                  <!-- Sala Ipê -->
+                  <div
+                    x-show="activeCategory === 'all' || activeCategory === 'reuniao'"
+                    class="grid grid-cols-[minmax(5.5rem,1.2fr)_repeat(4,minmax(3rem,1fr))] gap-2 py-3.5 items-center transition-colors hover:bg-slate-50/50"
+                  >
+                    <div class="min-w-0 pr-2">
+                      <p class="font-bold text-slate-900 truncate">Sala Ipê</p>
+                      <p class="text-[11px] text-slate-500 truncate">6 a 8 pessoas</p>
+                    </div>
+
+                    <!-- 09:00: Reunião -->
+                    <div class="rounded-lg border border-primary/30 bg-primary/10 p-2 text-center">
+                      <span class="font-semibold text-primary truncate block text-[11px]">Reunião</span>
+                      <span class="text-[9px] text-primary/80 hidden sm:block">Design Studio</span>
+                    </div>
+
+                    <!-- 10:30: Disponível e Interativo -->
+                    <button
+                      type="button"
+                      @click="selectedSlot = (selectedSlot === 'ipe-1030' ? null : 'ipe-1030')"
+                      :class="selectedSlot === 'ipe-1030' ? 'ring-2 ring-primary border-primary bg-primary-50 text-primary' : 'border-dashed border-emerald-300 bg-emerald-50/70 text-emerald-800 hover:bg-emerald-100/70'"
+                      class="rounded-lg border p-2 text-center transition-all cursor-pointer group"
+                      title="Clique para testar o agendamento em tempo real"
+                    >
+                      <span class="font-semibold block text-[11px]">Livre</span>
+                      <span class="text-[9px] text-emerald-700/80 group-hover:text-primary transition-colors hidden sm:block">Simular</span>
+                    </button>
+
+                    <!-- 12:00: Almoço / Livre -->
+                    <div class="rounded-lg border border-slate-200 bg-slate-50 p-2 text-center text-slate-400">
+                      <span class="text-[11px]">Livre</span>
+                    </div>
+
+                    <!-- 14:00: Reunião -->
+                    <div class="rounded-lg border border-slate-200 bg-slate-100 p-2 text-center text-slate-600">
+                      <span class="font-medium text-[11px] truncate block">Workshop</span>
+                    </div>
+                  </div>
+
+                  <!-- Cabine 02 -->
+                  <div
+                    x-show="activeCategory === 'all' || activeCategory === 'cabine'"
+                    class="grid grid-cols-[minmax(5.5rem,1.2fr)_repeat(4,minmax(3rem,1fr))] gap-2 py-3.5 items-center transition-colors hover:bg-slate-50/50"
+                  >
+                    <div class="min-w-0 pr-2">
+                      <p class="font-bold text-slate-900 truncate">Cabine 02</p>
+                      <p class="text-[11px] text-slate-500 truncate">Individual</p>
+                    </div>
+
+                    <!-- 09:00: Livre -->
+                    <div class="rounded-lg border border-slate-200 bg-slate-50 p-2 text-center text-slate-400">
+                      <span class="text-[11px]">Livre</span>
+                    </div>
+
+                    <!-- 10:30: Call Reservada -->
+                    <div class="rounded-lg border border-primary/30 bg-primary/10 p-2 text-center">
+                      <span class="font-semibold text-primary truncate block text-[11px]">Call</span>
+                    </div>
+
+                    <!-- 12:00: Livre Interativo -->
+                    <button
+                      type="button"
+                      @click="selectedSlot = (selectedSlot === 'cabine-1100' ? null : 'cabine-1100')"
+                      :class="selectedSlot === 'cabine-1100' ? 'ring-2 ring-primary border-primary bg-primary-50 text-primary' : 'border-dashed border-emerald-300 bg-emerald-50/70 text-emerald-800 hover:bg-emerald-100/70'"
+                      class="rounded-lg border p-2 text-center transition-all cursor-pointer group"
+                    >
+                      <span class="font-semibold block text-[11px]">Livre</span>
+                      <span class="text-[9px] text-emerald-700/80 group-hover:text-primary transition-colors hidden sm:block">Simular</span>
+                    </button>
+
+                    <!-- 14:00: Livre -->
+                    <div class="rounded-lg border border-slate-200 bg-slate-50 p-2 text-center text-slate-400">
+                      <span class="text-[11px]">Livre</span>
+                    </div>
+                  </div>
+
+                  <!-- Mesa Flex 04 -->
+                  <div
+                    x-show="activeCategory === 'all'"
+                    class="grid grid-cols-[minmax(5.5rem,1.2fr)_repeat(4,minmax(3rem,1fr))] gap-2 py-3.5 items-center transition-colors hover:bg-slate-50/50"
+                  >
+                    <div class="min-w-0 pr-2">
+                      <p class="font-bold text-slate-900 truncate">Mesa 04</p>
+                      <p class="text-[11px] text-slate-500 truncate">Salão Aberto</p>
+                    </div>
+
+                    <!-- Dia Inteiro: Disponível -->
+                    <div class="col-span-4 rounded-lg border border-emerald-200 bg-emerald-50/80 px-3 py-2 text-center font-medium text-emerald-900 flex items-center justify-between">
+                      <span class="text-[11px] font-semibold">Disponível para reserva diária</span>
+                      <span class="text-[10px] text-emerald-700 font-normal hidden sm:inline">Check-in direto via QR Code</span>
+                    </div>
+                  </div>
+
+                </div>
+
+                <!-- Painel de Feedback da Interação ao Vivo (Alpine.js) -->
+                <div
+                  x-show="selectedSlot"
+                  x-collapse
+                  class="mt-3 rounded-xl border border-primary/25 bg-primary-50/90 p-3.5 text-xs text-primary"
+                >
+                  <div class="flex items-center justify-between gap-2">
+                    <div class="flex items-center gap-2">
+                      <span class="flex h-5 w-5 items-center justify-center rounded-full bg-primary text-white" aria-hidden="true">✓</span>
+                      <span>
+                        Reserva em tempo real: <strong class="font-bold" x-text="slots[selectedSlot]?.room"></strong> às <strong class="font-bold" x-text="slots[selectedSlot]?.time"></strong>
+                        (<span x-text="slots[selectedSlot]?.cost"></span>)
+                      </span>
+                    </div>
+                    <button
+                      type="button"
+                      @click="selectedSlot = null"
+                      class="text-xs font-semibold underline hover:text-primary-hover"
+                    >
+                      Fechar
+                    </button>
+                  </div>
+                </div>
+
+              </div>
+
+              <!-- Rodapé do Mockup -->
+              <div class="flex items-center justify-between gap-3 border-t border-slate-100 bg-slate-900 px-4 py-3 text-white sm:px-5">
+                <div class="flex items-center gap-2.5">
+                  <svg class="h-4 w-4 text-emerald-400 shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z" />
+                  </svg>
+                  <p class="text-xs font-medium text-slate-200">
+                    <strong class="font-semibold text-white">Prevenção nativa de conflitos:</strong> validação dupla antes de cada confirmação.
+                  </p>
+                </div>
+                <span class="text-[10px] text-slate-400 hidden sm:inline">Demonstração ao vivo</span>
+              </div>
+
+            </div>
+          </div>
+
         </div>
+      </div>
+    </section>
+
+    <!-- Seção de Benefícios Operacionais (Problema vs Solução) -->
+    <section id="beneficios" class="scroll-mt-20 border-b border-surface-border py-16 sm:py-24 bg-white">
+      <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+        <div class="mx-auto max-w-2xl text-center">
+          <p class="text-xs font-bold uppercase tracking-wider text-primary">Operação sem atritos</p>
+          <h2 class="mt-3 text-balance text-3xl font-extrabold tracking-tight text-slate-900 sm:text-4xl">
+            A recepção pode parar de responder a mesma pergunta o dia inteiro.
+          </h2>
+          <p class="mt-4 text-pretty text-base text-slate-600 sm:text-lg">
+            Substitua mensagens no WhatsApp e calendários manuais por um fluxo direto em que o próprio membro resolve a reserva.
+          </p>
+        </div>
+
+        <div class="mt-14 grid gap-8 md:grid-cols-2 lg:gap-12">
+          
+          <!-- Card: O Jeito Antigo -->
+          <div class="rounded-2xl border border-red-100 bg-red-50/40 p-6 sm:p-8">
+            <div class="flex items-center gap-3">
+              <span class="flex h-9 w-9 items-center justify-center rounded-xl bg-red-100 text-red-600 font-bold" aria-hidden="true">✕</span>
+              <h3 class="text-xl font-bold text-slate-900">Como funciona sem o Coworkhub</h3>
+            </div>
+            <ul class="mt-6 space-y-4 text-sm text-slate-600">
+              <li class="flex items-start gap-3">
+                <span class="text-red-500 font-bold mt-0.5">•</span>
+                <span>Mensagens fora de horário pedindo para reservar sala na manhã seguinte.</span>
+              </li>
+              <li class="flex items-start gap-3">
+                <span class="text-red-500 font-bold mt-0.5">•</span>
+                <span>Dois clientes aparecendo para a mesma reunião porque a planilha não atualizou.</span>
+              </li>
+              <li class="flex items-start gap-3">
+                <span class="text-red-500 font-bold mt-0.5">•</span>
+                <span>Membros estourando as horas inclusas do plano sem que a equipe perceba.</span>
+              </li>
+              <li class="flex items-start gap-3">
+                <span class="text-red-500 font-bold mt-0.5">•</span>
+                <span>Tempo da recepção gasto conferindo calendários em vez de cuidar da comunidade.</span>
+              </li>
+            </ul>
+          </div>
+
+          <!-- Card: Com o Coworkhub -->
+          <div class="rounded-2xl border border-primary/20 bg-primary-50/30 p-6 sm:p-8 relative shadow-sm">
+            <div class="flex items-center gap-3">
+              <span class="flex h-9 w-9 items-center justify-center rounded-xl bg-primary text-white font-bold" aria-hidden="true">✓</span>
+              <h3 class="text-xl font-bold text-slate-900">Com o Coworkhub no seu espaço</h3>
+            </div>
+            <ul class="mt-6 space-y-4 text-sm text-slate-700">
+              <li class="flex items-start gap-3">
+                <span class="text-primary font-bold mt-0.5">•</span>
+                <span>O membro entra pelo celular no link exclusivo do coworking e consulta horários em 5 segundos.</span>
+              </li>
+              <li class="flex items-start gap-3">
+                <span class="text-primary font-bold mt-0.5">•</span>
+                <span>Bloqueio atômico de conflitos: o sistema impede fisicamente reservas sobrepostas.</span>
+              </li>
+              <li class="flex items-start gap-3">
+                <span class="text-primary font-bold mt-0.5">•</span>
+                <span>Débito automático da franquia de horas do plano, avisando quando o limite é atingido.</span>
+              </li>
+              <li class="flex items-start gap-3">
+                <span class="text-primary font-bold mt-0.5">•</span>
+                <span>Histórico completo de utilização para auditoria e decisões operacionais.</span>
+              </li>
+            </ul>
+          </div>
+
+        </div>
+      </div>
+    </section>
+
+    <!-- Recursos em Grid Modular / Bento -->
+    <section id="recursos" class="scroll-mt-20 border-b border-surface-border bg-surface-muted py-16 sm:py-24">
+      <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+        <div class="max-w-2xl">
+          <p class="text-xs font-bold uppercase tracking-wider text-primary">Recursos Essenciais</p>
+          <h2 class="mt-3 text-balance text-3xl font-extrabold tracking-tight text-slate-900 sm:text-4xl">
+            Tudo o que sua operação precisa, sem complexidade desnecessária.
+          </h2>
+          <p class="mt-4 text-base text-slate-600">
+            Desenhado para ser simples para quem reserva e confiável para quem gerencia.
+          </p>
+        </div>
+
+        <div class="mt-12 grid gap-6 md:grid-cols-2 lg:grid-cols-3">
+          
+          <!-- Recurso 1: Portal Mobile Web -->
+          <div class="rounded-2xl border border-surface-border bg-white p-6 sm:p-8 shadow-xs flex flex-col justify-between">
+            <div>
+              <div class="flex h-11 w-11 items-center justify-center rounded-xl bg-slate-100 text-slate-900">
+                <svg class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 18h.01M8 21h8a2 2 0 002-2V5a2 2 0 00-2-2H8a2 2 0 00-2 2v14a2 2 0 002 2z" />
+                </svg>
+              </div>
+              <h3 class="mt-5 text-xl font-bold text-slate-900">Portal 100% no Navegador</h3>
+              <p class="mt-3 text-sm leading-relaxed text-slate-600">
+                Seus membros não precisam baixar aplicativo nem se preocupar com atualizações na loja. Basta acessar o link exclusivo do seu coworking pelo celular ou computador.
+              </p>
+            </div>
+            <div class="mt-6 pt-4 border-t border-slate-100 text-xs font-semibold text-slate-500">
+              Acesso rápido com link direto
+            </div>
+          </div>
+
+          <!-- Recurso 2: Controle de Franquias e Planos -->
+          <div class="rounded-2xl border border-surface-border bg-white p-6 sm:p-8 shadow-xs flex flex-col justify-between">
+            <div>
+              <div class="flex h-11 w-11 items-center justify-center rounded-xl bg-primary-50 text-primary">
+                <svg class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 7h6m0 10v-3m-3 3h.01M9 17h.01M9 14h.01M12 14h.01M15 11h.01M12 11h.01M9 11h.01M7 21h10a2 2 0 002-2V5a2 2 0 00-2-2H7a2 2 0 00-2 2v14a2 2 0 002 2z" />
+                </svg>
+              </div>
+              <h3 class="mt-5 text-xl font-bold text-slate-900">Franquias e Horas Inclusas</h3>
+              <p class="mt-3 text-sm leading-relaxed text-slate-600">
+                Defina franquias de horas de reunião para cada plano de associado. O sistema controla o saldo automaticamente e avisa quando o limite mensal foi atingido.
+              </p>
+            </div>
+            <div class="mt-6 pt-4 border-t border-slate-100 text-xs font-semibold text-primary">
+              Fim do controle em planilhas
+            </div>
+          </div>
+
+          <!-- Recurso 3: Multiunidades -->
+          <div class="rounded-2xl border border-surface-border bg-white p-6 sm:p-8 shadow-xs flex flex-col justify-between">
+            <div>
+              <div class="flex h-11 w-11 items-center justify-center rounded-xl bg-slate-100 text-slate-900">
+                <svg class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 21V5a2 2 0 00-2-2H7a2 2 0 00-2 2v16m14 0h2m-2 0h-5m-9 0H3m2 0h5M9 7h1m-1 4h1m4-4h1m-1 4h1m-5 10v-5a1 1 0 011-1h2a1 1 0 011 1v5m-4 0h4" />
+                </svg>
+              </div>
+              <h3 class="mt-5 text-xl font-bold text-slate-900">Suporte a Múltiplas Unidades</h3>
+              <p class="mt-3 text-sm leading-relaxed text-slate-600">
+                Gerencie matriz e filiais sob a mesma conta. Seus membros podem reservar recursos em qualquer unidade autorizada sem duplicar cadastros.
+              </p>
+            </div>
+            <div class="mt-6 pt-4 border-t border-slate-100 text-xs font-semibold text-slate-500">
+              Escalável para o seu crescimento
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </section>
+
+    <!-- Como Funciona (3 Passos) -->
+    <section id="como-funciona" class="scroll-mt-20 border-b border-surface-border py-16 sm:py-24 bg-white">
+      <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+        <div class="mx-auto max-w-2xl text-center">
+          <p class="text-xs font-bold uppercase tracking-wider text-primary">Simplicidade de Implantação</p>
+          <h2 class="mt-3 text-balance text-3xl font-extrabold tracking-tight text-slate-900 sm:text-4xl">
+            Do endereço à primeira reserva em três passos.
+          </h2>
+          <p class="mt-4 text-base text-slate-600">
+            Sem processos longos de integração ou treinamentos complexos para a equipe.
+          </p>
+        </div>
+
+        <div class="mt-14 grid gap-8 lg:grid-cols-3">
+          
+          <div class="relative rounded-2xl border border-surface-border p-6 sm:p-8 bg-surface-muted/50">
+            <span class="inline-flex h-9 w-9 items-center justify-center rounded-xl bg-primary text-white text-sm font-bold">
+              01
+            </span>
+            <h3 class="mt-5 text-xl font-bold text-slate-900">Escolha seu endereço</h3>
+            <p class="mt-3 text-sm leading-relaxed text-slate-600">
+              Defina o subdomínio exclusivo do seu coworking (ex: <code class="font-mono text-primary font-semibold">suamarca.coworkhub.com.br</code>) para personalizar o acesso da comunidade.
+            </p>
+          </div>
+
+          <div class="relative rounded-2xl border border-surface-border p-6 sm:p-8 bg-surface-muted/50">
+            <span class="inline-flex h-9 w-9 items-center justify-center rounded-xl bg-slate-900 text-white text-sm font-bold">
+              02
+            </span>
+            <h3 class="mt-5 text-xl font-bold text-slate-900">Cadastre seus espaços</h3>
+            <p class="mt-3 text-sm leading-relaxed text-slate-600">
+              Adicione suas salas, mesas e cabines com capacidade, fotos, regras de antecedência mínima e limites de horários para cada plano de membro.
+            </p>
+          </div>
+
+          <div class="relative rounded-2xl border border-surface-border p-6 sm:p-8 bg-surface-muted/50">
+            <span class="inline-flex h-9 w-9 items-center justify-center rounded-xl bg-slate-900 text-white text-sm font-bold">
+              03
+            </span>
+            <h3 class="mt-5 text-xl font-bold text-slate-900">Convide os membros</h3>
+            <p class="mt-3 text-sm leading-relaxed text-slate-600">
+              Envie o link para os membros. Eles entram pelo navegador móvel, conferem os horários em tempo real e reservam sem precisar incomodar a recepção.
+            </p>
+          </div>
+
+        </div>
+      </div>
+    </section>
+
+    <!-- Oferta -->
+    <section id="oferta" class="scroll-mt-20 border-b border-surface-border py-16 sm:py-24 bg-surface-muted">
+      <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+        <div class="overflow-hidden rounded-3xl border border-slate-900 bg-slate-900 text-white shadow-xl lg:grid lg:grid-cols-[1.2fr_0.8fr]">
+          
+          <div class="p-8 sm:p-12 lg:p-16 flex flex-col justify-between">
+            <div>
+              <span class="inline-flex items-center gap-2 rounded-full border border-primary/40 bg-primary/20 px-3.5 py-1 text-xs font-semibold text-primary-200">
+                Avaliação sem compromisso
+              </span>
+              <h2 class="mt-6 text-balance text-3xl font-extrabold tracking-tight sm:text-4xl lg:text-5xl">
+                Teste por 7 dias grátis antes da primeira cobrança.
+              </h2>
+              <p class="mt-5 text-pretty text-base text-slate-300 sm:text-lg">
+                Coloque a agenda para rodar na sua operação real. A assinatura da plataforma é calculada por unidade, sem fidelidade e sem taxas de adesão.
+              </p>
+            </div>
+
+            <div class="mt-8">
+              <a
+                href="#hero-signup"
+                class="inline-flex min-h-12 items-center justify-center rounded-xl bg-primary px-6 text-sm font-semibold text-white shadow-md transition-all hover:bg-primary-hover hover:shadow-lg focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary focus-visible:ring-offset-2 focus-visible:ring-offset-slate-900"
+              >
+                Verificar meu endereço
+              </a>
+            </div>
+          </div>
+
+          <div class="border-t border-slate-800 bg-slate-950/70 p-8 sm:p-12 lg:border-l lg:border-t-0 flex flex-col justify-center">
+            <h3 class="text-sm font-bold uppercase tracking-wider text-primary">Incluso em todos os planos</h3>
+            <ul class="mt-6 space-y-4 text-sm text-slate-300">
+              <li class="flex items-center gap-3">
+                <span class="flex h-5 w-5 shrink-0 items-center justify-center rounded-full bg-emerald-500/20 text-emerald-400 font-bold text-xs">✓</span>
+                <span>Salas, cabines e mesas identificadas por unidade</span>
+              </li>
+              <li class="flex items-center gap-3">
+                <span class="flex h-5 w-5 shrink-0 items-center justify-center rounded-full bg-emerald-500/20 text-emerald-400 font-bold text-xs">✓</span>
+                <span>Reservas flexíveis em blocos de 30 minutos</span>
+              </li>
+              <li class="flex items-center gap-3">
+                <span class="flex h-5 w-5 shrink-0 items-center justify-center rounded-full bg-emerald-500/20 text-emerald-400 font-bold text-xs">✓</span>
+                <span>Controle de créditos e limites por plano de membro</span>
+              </li>
+              <li class="flex items-center gap-3">
+                <span class="flex h-5 w-5 shrink-0 items-center justify-center rounded-full bg-emerald-500/20 text-emerald-400 font-bold text-xs">✓</span>
+                <span>Cancelamento e estorno automáticos de créditos</span>
+              </li>
+              <li class="flex items-center gap-3">
+                <span class="flex h-5 w-5 shrink-0 items-center justify-center rounded-full bg-emerald-500/20 text-emerald-400 font-bold text-xs">✓</span>
+                <span>Subdomínio web exclusivo para o seu espaço</span>
+              </li>
+            </ul>
+            <p class="mt-8 text-xs text-slate-400">
+              Infraestrutura dedicada e segura para cada espaço cadastrado.
+            </p>
+          </div>
+
+        </div>
+      </div>
+    </section>
+
+    <!-- FAQ com Alpine.js -->
+    <section id="faq" class="scroll-mt-20 border-b border-surface-border py-16 sm:py-24 bg-white" x-data="{ activeFaq: null }">
+      <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+        <div class="grid gap-12 lg:grid-cols-[0.8fr_1.2fr] lg:gap-16">
+          
+          <div>
+            <p class="text-xs font-bold uppercase tracking-wider text-primary">Tire suas dúvidas</p>
+            <h2 class="mt-3 text-balance text-3xl font-extrabold tracking-tight text-slate-900 sm:text-4xl">
+              Perguntas frequentes sobre o Coworkhub.
+            </h2>
+            <p class="mt-4 text-base text-slate-600">
+              Tudo o que você precisa saber sobre o funcionamento e a implantação da plataforma no seu espaço.
+            </p>
+          </div>
+
+          <div class="divide-y divide-surface-border border-t border-surface-border">
+            
+            <!-- Pergunta 1 -->
+            <div class="py-5">
+              <button
+                type="button"
+                @click="activeFaq = (activeFaq === 1 ? null : 1)"
+                class="flex w-full min-h-12 items-center justify-between gap-4 text-left font-bold text-slate-900 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary rounded-lg"
+                aria-controls="faq-answer-1"
+                :aria-expanded="activeFaq === 1"
+              >
+                <span class="text-base sm:text-lg">A consulta de endereço já cria uma conta?</span>
+                <span class="flex h-7 w-7 shrink-0 items-center justify-center rounded-full bg-slate-100 text-slate-600 transition-transform duration-200" :class="{ 'rotate-180 bg-primary/10 text-primary': activeFaq === 1 }">
+                  <svg class="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" />
+                  </svg>
+                </span>
+              </button>
+              <div
+                id="faq-answer-1"
+                x-show="activeFaq === 1"
+                x-collapse
+                class="mt-3 text-pretty text-sm sm:text-base leading-relaxed text-slate-600 pr-6"
+              >
+                Ainda não. A checagem confirma se o endereço desejado está disponível para o seu coworking. Ao avançar, você conclui a configuração inicial do seu ambiente e inicia seus 7 dias de avaliação gratuita.
+              </div>
+            </div>
+
+            <!-- Pergunta 2 -->
+            <div class="py-5">
+              <button
+                type="button"
+                @click="activeFaq = (activeFaq === 2 ? null : 2)"
+                class="flex w-full min-h-12 items-center justify-between gap-4 text-left font-bold text-slate-900 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary rounded-lg"
+                aria-controls="faq-answer-2"
+                :aria-expanded="activeFaq === 2"
+              >
+                <span class="text-base sm:text-lg">Os membros precisam instalar algum aplicativo da loja?</span>
+                <span class="flex h-7 w-7 shrink-0 items-center justify-center rounded-full bg-slate-100 text-slate-600 transition-transform duration-200" :class="{ 'rotate-180 bg-primary/10 text-primary': activeFaq === 2 }">
+                  <svg class="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" />
+                  </svg>
+                </span>
+              </button>
+              <div
+                id="faq-answer-2"
+                x-show="activeFaq === 2"
+                x-collapse
+                class="mt-3 text-pretty text-sm sm:text-base leading-relaxed text-slate-600 pr-6"
+              >
+                Não. O portal foi projetado para funcionar com alta responsividade diretamente no navegador do celular ou notebook pelo subdomínio exclusivo do seu coworking.
+              </div>
+            </div>
+
+            <!-- Pergunta 3 -->
+            <div class="py-5">
+              <button
+                type="button"
+                @click="activeFaq = (activeFaq === 3 ? null : 3)"
+                class="flex w-full min-h-12 items-center justify-between gap-4 text-left font-bold text-slate-900 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary rounded-lg"
+                aria-controls="faq-answer-3"
+                :aria-expanded="activeFaq === 3"
+              >
+                <span class="text-base sm:text-lg">O Coworkhub cobra as mensalidades dos membros?</span>
+                <span class="flex h-7 w-7 shrink-0 items-center justify-center rounded-full bg-slate-100 text-slate-600 transition-transform duration-200" :class="{ 'rotate-180 bg-primary/10 text-primary': activeFaq === 3 }">
+                  <svg class="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" />
+                  </svg>
+                </span>
+              </button>
+              <div
+                id="faq-answer-3"
+                x-show="activeFaq === 3"
+                x-collapse
+                class="mt-3 text-pretty text-sm sm:text-base leading-relaxed text-slate-600 pr-6"
+              >
+                Não. A plataforma administra os direitos de uso, as franquias de horas e as reservas operacionais. A cobrança da mensalidade dos seus associados continua no seu processo financeiro atual.
+              </div>
+            </div>
+
+            <!-- Pergunta 4 -->
+            <div class="py-5">
+              <button
+                type="button"
+                @click="activeFaq = (activeFaq === 4 ? null : 4)"
+                class="flex w-full min-h-12 items-center justify-between gap-4 text-left font-bold text-slate-900 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary rounded-lg"
+                aria-controls="faq-answer-4"
+                :aria-expanded="activeFaq === 4"
+              >
+                <span class="text-base sm:text-lg">Posso gerenciar mais de uma unidade na mesma conta?</span>
+                <span class="flex h-7 w-7 shrink-0 items-center justify-center rounded-full bg-slate-100 text-slate-600 transition-transform duration-200" :class="{ 'rotate-180 bg-primary/10 text-primary': activeFaq === 4 }">
+                  <svg class="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" />
+                  </svg>
+                </span>
+              </button>
+              <div
+                id="faq-answer-4"
+                x-show="activeFaq === 4"
+                x-collapse
+                class="mt-3 text-pretty text-sm sm:text-base leading-relaxed text-slate-600 pr-6"
+              >
+                Sim. A arquitetura suporta matriz e filiais na mesma organização, compartilhando a marca, a gestão e o mesmo subdomínio.
+              </div>
+            </div>
+
+          </div>
+
+        </div>
+      </div>
+    </section>
+
+    <!-- Chamada Final / Pre-footer -->
+    <section class="border-b border-surface-border bg-slate-50 py-16 sm:py-20">
+      <div class="mx-auto flex max-w-7xl flex-col items-start justify-between gap-8 px-4 sm:px-6 lg:flex-row lg:items-center lg:px-8">
+        <div class="max-w-2xl">
+          <h2 class="text-balance text-3xl font-extrabold tracking-tight text-slate-900 sm:text-4xl">
+            Comece pelo endereço do seu coworking.
+          </h2>
+          <p class="mt-3 text-pretty text-base text-slate-600">
+            Valide a disponibilidade do seu subdomínio agora e comece a operar com organização.
+          </p>
+        </div>
+        <a
+          href="#hero-signup"
+          class="inline-flex min-h-12 shrink-0 items-center justify-center rounded-xl bg-slate-900 px-6 text-sm font-semibold text-white shadow-xs transition-all hover:bg-primary hover:shadow-md focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary focus-visible:ring-offset-2 active:scale-[0.99]"
+        >
+          Verificar meu endereço
+        </a>
       </div>
     </section>
   </main>
 
-  <!-- ========================================================================= -->
-  <!-- 9. FOOTER INSTITUCIONAL                                                   -->
-  <!-- ========================================================================= -->
-  <footer class="border-t border-surface-border bg-white py-12">
-    <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-      <div class="flex flex-col sm:flex-row items-center justify-between gap-6 text-sm text-black/60">
-        <div class="flex items-center gap-3">
+  <!-- Rodapé -->
+  <footer class="bg-white py-10">
+    <div class="mx-auto flex max-w-7xl flex-col gap-6 px-4 text-sm text-slate-500 sm:flex-row sm:items-center sm:justify-between sm:px-6 lg:px-8">
+      <div class="flex items-center gap-3">
+        <a href="{% url 'home' %}" aria-label="Coworkhub início">
           <img
             src="{% static 'images/logotipo-lightmode.svg' %}"
             alt="Coworkhub"
-            class="h-6 w-auto opacity-75"
             width="111"
             height="24"
+            loading="lazy"
+            class="h-6 w-auto opacity-80 transition-opacity hover:opacity-100"
           >
-          <span class="text-xs">&copy; {% now "Y" %} · Todos os direitos reservados.</span>
-        </div>
-        
-        <div class="flex items-center gap-6">
-          <a href="#hero-signup" class="hover:text-primary transition-colors">Criar Espaço</a>
-          <a href="#como-funciona" class="hover:text-primary transition-colors">Como Funciona</a>
-          <a href="#precos" class="hover:text-primary transition-colors">Preços</a>
-          <a href="#faq" class="hover:text-primary transition-colors">FAQ</a>
-        </div>
+        </a>
+        <span class="text-slate-300">|</span>
+        <img
+          src="{% static 'images/logo.svg' %}"
+          alt="Ícone Coworkhub"
+          width="20"
+          height="20"
+          loading="lazy"
+          class="h-5 w-auto opacity-75"
+        >
+        <span>&copy; {% now "Y" %} Coworkhub. Todos os direitos reservados.</span>
       </div>
+
+      <nav class="flex flex-wrap gap-x-6 gap-y-2 text-sm" aria-label="Navegação do rodapé">
+        <a href="#como-funciona" class="hover:text-primary transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary rounded">Como funciona</a>
+        <a href="#beneficios" class="hover:text-primary transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary rounded">Vantagens</a>
+        <a href="#recursos" class="hover:text-primary transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary rounded">Recursos</a>
+        <a href="#faq" class="hover:text-primary transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary rounded">Dúvidas</a>
+      </nav>
     </div>
   </footer>
-
 </div>
 {% endblock %}
