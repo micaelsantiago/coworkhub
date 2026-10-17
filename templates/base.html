@@ -4,9 +4,11 @@
   <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="theme-color" content="#ffffff">
     <title>{% block title %}Coworkhub{% endblock %}</title>
-    <link rel="stylesheet" href="{% static 'css/app.css' %}?v={% now 'U' %}">
-    <script defer src="{% static 'js/app.js' %}?v={% now 'U' %}"></script>
+    <link rel="icon" type="image/svg+xml" href="{% static 'images/logo.svg' %}">
+    <link rel="stylesheet" href="{% static 'css/app.css' %}">
+    <script defer src="{% static 'js/app.js' %}"></script>
   </head>
   <body class="min-h-screen bg-white text-black antialiased">
     {% block content %}{% endblock %}
